@@ -1,7 +1,11 @@
+<?php
+session_start();
+include'includes/dbconnect.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>InCredible</title>
+	<title>BMU Bank</title>
 	<link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -22,10 +26,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
-
+				<?php if (isset($_SESSION['usr_id'])) { ?>
 				
 				<li><a href="logout.php">Log Out</a></li>
+				<?php } else { ?>
 				<li><a href="login.php">Login</a></li>
+				<li><a href="register.php">Sign Up</a></li>
+				<?php } ?>
 			</ul>
 		</div>
 	</div>
@@ -35,8 +42,8 @@
 <div class="col-lg-2">
 	<ul class="navbar navbar-default nav" style="height: 650px;">
 
-		<li><a href="addcard.php"><span style="margin-left: 25px; margin-top:20px; font-size: 20px;"><b>Add Card</b></span></a></li>
-		<li><a href="removecard.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Remove Card</b></span></a></li>
+		<li><a href="addaccount.php"><span style="margin-left: 25px; margin-top:20px; font-size: 20px;"><b>Add Card</b></span></a></li>
+		<li><a href="deleteaccount.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Remove Card</b></span></a></li>
 		<!-- <li><a href="grantloan.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Grant Loan</b></span></a></li> -->
 		<li><a href="viewaccounts.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>View accounts</b></span></a></li>
 		<li><a href="depositmoney.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Deposit money</b></span></a></li>
@@ -44,6 +51,47 @@
 		<!-- <li><a href="viewloans.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>View loans</b></span></a></li> -->
 		</ul>
 		</div>
+
+<div class="container">
+	<article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Accounts information</h2>
+			</div>
+			<table class="table table-bordered">
+				   		<thead>
+				   			<th>Account no</th>
+				   			<th>Holder name</th>
+				   			<th>Balance</th>
+				   			</thead>
+			<?php 
+
+				$ins_sql = "SELECT * FROM accounts";
+				$run_sql = mysqli_query($con, $ins_sql);
+
+				while($rows = mysqli_fetch_array($run_sql)){
+
+					echo '
+
+					
+					    <tbody>
+					      <tr>
+					        <td>'.$rows['accno'].'</td>
+					        <td>'.$rows['accname'].'</td>
+					        <td>'.$rows['accountbalance'].'</td>
+					      </tr>
+					    </tbody>
+			 		
+
+					';
+				}
+				?>
+				 </table>
+
+	</article></section>
+	
+
+</div>
 
 </body>
 </html>

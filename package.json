@@ -1,0 +1,22 @@
+{
+  "name": "incredible",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prajwal2204/InCredible.git"
+  },
+  "author": "Prajwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prajwal2204/InCredible/issues"
+  },
+  "homepage": "https://github.com/Prajwal2204/InCredible#readme",
+  "devDependencies": {
+    "bootstrap": "^4.6.0"
+  }
+}
