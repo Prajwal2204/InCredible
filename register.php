@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     </style>
     <style>
-        body{
+        /* body{
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 20s ease infinite;
@@ -54,13 +54,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             100% {
                 background-position: 0% 50%;
             }
+        } */
+        body{
+            background-color: rgb(246,76,114);
         }
     </style>
 </head>
 <body>
-    <div class="wrapper container bg-white sike">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
+    <div class="wrapper container col-6 sike">
+        <img class="center" src = "img/logo.PNG">
+        <br><br><br>
+        <h2 class="d-flex justify-content-center">Sign Up</h2>
+        <p class="d-flex justify-content-center">Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Username</label>
@@ -88,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
             
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <p class="d-flex justify-content-center">Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
     </div>    
 </body>

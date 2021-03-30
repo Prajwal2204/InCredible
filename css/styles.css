@@ -70,4 +70,18 @@
 
   .sike{
       border-radius: 7px;
+      background-color: rgb(47,47,162);
+      color: #fff;
+      padding: 125px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
+  }
+
+  .btn-custom1{
+    background-color: rgb(246,76,114);
   }
