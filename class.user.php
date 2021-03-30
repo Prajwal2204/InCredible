@@ -9,12 +9,15 @@
 		// 	// $this->db = $mysqli;
 		// }
 
+        
+
         public function registration($usr,$email,$pass,$cpass){
             global $mysqli;
             global $username_err;
             global $email_err;
             global $confirm_password_err;
             global $password_err;  
+
             // $pass = md5($pass);
             // $cpass = md5($cpass); 
             if(empty(trim($usr))){
@@ -86,7 +89,7 @@
                 // $pass = md5($pass);
                 // $cpass = md5($cpass);
                 // Prepare an insert statement
-                $sql = "INSERT INTO users (username, emailid, password) VALUES (?, ?)";
+                $sql = "INSERT INTO users (username, emailid, password) VALUES (?, ?, ?)";
                  
                 if($stmt = $mysqli->prepare($sql)){
                     // Set parameters

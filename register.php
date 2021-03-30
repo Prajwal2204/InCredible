@@ -6,7 +6,7 @@ $user = new User;
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $emailid = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username_err = $password_err = $email_err = $confirm_password_err = "";
 
     // global $mysqli; 
     
@@ -29,14 +29,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel = "stylesheet" href = "css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
+
+    </style>
+    <style>
+        body{
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 20s ease infinite;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper container bg-white sike">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
