@@ -99,6 +99,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel = "stylesheet" href = "css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
@@ -121,7 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         } */
         body{
-            background-color: rgb(246,76,114);
+            background-color: #dc3545;
         }
     </style>
 </head>
@@ -130,15 +132,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="col-8 custom-jumbo">
 			<div class="row">
                 <div class="col-sm-12">
-                    <h1 class="display-3"><img class="jumbo-img" src="img/logo-dark.PNG"></h1>
+                    <div style="width: 150px; height: 150px;"></div>
+                    <h1 class="display-3"><img class="jumbo-img" src="img/logo-inverted.PNG"></h1>
                     <br>
-                    <h3 style="color: #000;">A web app to take care of all your credit card needs.</h3>
+                    <h3 class="d-flex justify-content-center font-change" style="color: #fff;">Manage your personal information wisely!</h3>
+                    <h3 class="d-flex justify-content-center font-change" style="color: #fff;">We provide a wide range of services for your credit card necessities for free!!</h3>
+                    <h3 class="d-flex justify-content-center font-change" style="color: #fff;">From adding cards into your portfolio to transaction management, we've got you covered.</h3>
                     <br>
                 </div>
 			</div>
 		</div>
 
         <div class = "col-4">
+        <div style="width: 150px; height: 150px;"></div>
             <div class="wrapper container sike">
                 <img class="center" src = "img/logo.PNG">
                 <br><br><br>

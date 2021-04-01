@@ -87,6 +87,16 @@
     /* width: 50%; */
   }
 
+  h1.display-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .font-change{  
+    font-family: 'Roboto', sans-serif;
+  }
+
   .btn-custom1{
-    background-color: rgb(246,76,114);
+    background-color: #dc3545;
   }
