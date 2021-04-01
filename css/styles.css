@@ -74,7 +74,12 @@
       color: #fff;
       padding: 125px;
   }
-
+  .custom-jumbo{
+    /* background-color: rgb(36,37,130); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .center {
     display: block;
     margin-left: auto;

@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login - InCredible</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel = "stylesheet" href = "css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -126,34 +126,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
-    <div class="wrapper container sike">
-        <img class="center" src = "img/logo.PNG">
-        <br><br><br>
-        <h2 class="d-flex justify-content-center">Login</h2>
-        <p class="d-flex justify-content-center">Please fill in your credentials to login.</p>
+    <div class = "row">
+        <div class="col-8 custom-jumbo">
+			<div class="row">
+                <div class="col-sm-12">
+                    <h1 class="display-3"><img class="jumbo-img" src="img/logo-dark.PNG"></h1>
+                    <br>
+                    <h3 style="color: #000;">A web app to take care of all your credit card needs.</h3>
+                    <br>
+                </div>
+			</div>
+		</div>
 
-        <?php 
-        if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
-        ?>
+        <div class = "col-4">
+            <div class="wrapper container sike">
+                <img class="center" src = "img/logo.PNG">
+                <br><br><br>
+                <h2 class="d-flex justify-content-center">Login</h2>
+                <p class="d-flex justify-content-center">Please fill in your credentials to login.</p>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <?php 
+                if(!empty($login_err)){
+                    echo '<div class="alert alert-danger">' . $login_err . '</div>';
+                }        
+                ?>
+
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                        <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                    </div>    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                        <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                    </div>
+                    <div class="form-group d-flex justify-content-center">
+                        <input type="submit" class="btn btn-primary" value="Login">
+                    </div>
+                    <p class="d-flex justify-content-center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                </form>
             </div>
-            <div class="form-group d-flex justify-content-center">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <p class="d-flex justify-content-center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
-        </form>
+        </div>
     </div>
 </body>
 </html>

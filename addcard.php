@@ -45,7 +45,11 @@ include 'config.php';
 		<ul class="topnav">
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
 			<li><a href="admin.php">Home</a></li>
+			<?php if (isset($_SESSION["username"])) { ?>
 			<li class = "topnav-right"><h3>Welcome, <?php echo $_SESSION["username"]; ?></h3></li>
+			<?php } else { ?>
+				<li class = "topnav-right"><h3>Welcome</h3></li>
+				<?php } ?>
 			<?php if (isset($_SESSION["loggedin"])) { ?>
 			<li class = "topnav-right"><a href="logout.php">Log Out</a></li>
 			<?php } else { ?>
