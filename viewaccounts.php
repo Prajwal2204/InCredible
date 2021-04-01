@@ -5,93 +5,80 @@ include'config.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<title>BMU Bank</title>
-	<link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>InCredible</title>
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel = "stylesheet" href = "css/styles-admin.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
 
-<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="admin.php">Admin Dashboard</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar1">
-			<ul class="nav navbar-nav navbar-right">
-				<?php if (isset($_SESSION['usr_id'])) { ?>
-				
-				<li><a href="logout.php">Log Out</a></li>
-				<?php } else { ?>
-				<li><a href="login.php">Login</a></li>
-				<li><a href="register.php">Sign Up</a></li>
-				<?php } ?>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<div style="width: 50px; height: 50px;"></div>
-<div class="col-lg-2">
-	<ul class="navbar navbar-default nav" style="height: 650px;">
-
-		<li><a href="addaccount.php"><span style="margin-left: 25px; margin-top:20px; font-size: 20px;"><b>Add Card</b></span></a></li>
-		<li><a href="deleteaccount.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Remove Card</b></span></a></li>
-		<!-- <li><a href="grantloan.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Grant Loan</b></span></a></li> -->
-		<li><a href="viewaccounts.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>View accounts</b></span></a></li>
-		<li><a href="depositmoney.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Deposit money</b></span></a></li>
-		<li><a href="withdrawmoney.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>Withdraw Money</b></span></a></li>
-		<!-- <li><a href="viewloans.php"><span style="margin-left: 25px; margin-top: 20px; font-size: 20px;"><b>View loans</b></span></a></li> -->
+<body class="signin-body">
+	<nav>
+		<ul class="topnav">
+			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
+			<li><a href="admin.php">Home</a></li>
+			<li class = "topnav-right"><h3>Welcome, <?php echo $_SESSION["username"]; ?></h3></li>
+			<?php if (isset($_SESSION["loggedin"])) { ?>
+			<li class = "topnav-right"><a href="logout.php">Log Out</a></li>
+			<?php } else { ?>
+			<li class = "topnav-right"><a href="login.php">Login</a></li>
+			<?php } ?>
 		</ul>
+	</nav>
+
+<!-- <div style="width: 50px; height: 50px;"></div> -->
+	<div class = "row">	
+		<div class="col-3 sidenav">
+				<ul class="list-unstyled">
+					<li><a class="btn btn-outline-danger" href="accountdetails.php"><b>Account Details</b></a></li>			
+					<li><a class="btn btn-outline-danger" href="addcard.php"><b>Add Card</b></a></li>
+					<li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li>
+					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
+					<li><a class="btn btn-outline-danger active" href="viewaccounts.php"><b>View accounts</b></a></li>
+					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>
+				</ul>
 		</div>
 
-<div class="container">
-	<article class="row">
-		<section class="col-lg-8">
-			<div class="page-header">
-				<h2>Accounts information</h2>
-			</div>
-			<table class="table table-bordered">
-				   		<thead>
-				   			<th>Account no</th>
-				   			<th>Holder name</th>
-				   			<th>Balance</th>
-				   			</thead>
-			<?php 
+		<div class="col-8 container">
+		<div style="width: 150px; height: 150px;"></div>	
+			<article class="row custom-left-pad">
+				<section class="col-lg-8 white-font">
+					<div class="page-header">
+						<h2>Accounts information</h2>
+					</div>
+					<table class="table table-bordered">
+								<thead>
+									<th class="white-font">Account no</th>
+									<th class="white-font">Holder name</th>
+									<th class="white-font">Balance</th>
+									</thead>
+					<?php 
 
-				$ins_sql = "SELECT * FROM accounts";
-				$run_sql = mysqli_query($con, $ins_sql);
+						$ins_sql = "SELECT * FROM accounts";
+						$run_sql = mysqli_query($con, $ins_sql);
 
-				while($rows = mysqli_fetch_array($run_sql)){
+						while($rows = mysqli_fetch_array($run_sql)){
 
-					echo '
+							echo '
 
-					
-					    <tbody>
-					      <tr>
-					        <td>'.$rows['accno'].'</td>
-					        <td>'.$rows['accname'].'</td>
-					        <td>'.$rows['accountbalance'].'</td>
-					      </tr>
-					    </tbody>
-			 		
+							
+								<tbody>
+								<tr>
+									<td>'.$rows['accno'].'</td>
+									<td>'.$rows['accname'].'</td>
+									<td>'.$rows['accountbalance'].'</td>
+								</tr>
+								</tbody>
+							
 
-					';
-				}
-				?>
-				 </table>
+							';
+						}
+						?>
+						</table>
 
-	</article></section>
-	
-
-</div>
+			</article></section>
+			
+					</div>
+		</div>
 
 </body>
 </html>
