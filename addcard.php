@@ -55,7 +55,7 @@ include 'config.php';
 	</nav>
 
 	<div class = "row">
-		<div class="col-3 sidenav">
+		<div class="col-2 sidenav">
 				<ul class="list-unstyled">
 					<li><a class="btn btn-outline-danger" href="accountdetails.php"><b>Account Details</b></a></li>			
 					<li><a class="btn btn-outline-danger active" href="addcard.php"><b>Add Card</b></a></li>

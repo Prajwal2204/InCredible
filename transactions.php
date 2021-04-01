@@ -28,7 +28,7 @@ $id = addslashes($_SESSION["id"]);
 
 <!-- <div style="width: 50px; height: 50px;"></div> -->
 	<div class = "row">	
-		<div class="col-3 sidenav">
+		<div class="col-2 sidenav">
 				<ul class="list-unstyled">
 					<li><a class="btn btn-outline-danger" href="accountdetails.php"><b>Account Details</b></a></li>			
 					<li><a class="btn btn-outline-danger" href="addcard.php"><b>Add Card</b></a></li>
