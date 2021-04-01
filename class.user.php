@@ -7,7 +7,7 @@
 		// public function __construct(){
 		// 	// global $mysqli;
 		// 	// $this->db = $mysqli;
-		// }
+		// } 
 
         
 

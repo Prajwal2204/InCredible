@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'includes/dbconnect.php';
+include_once 'config.php';
 $id = addslashes($_SESSION['usr_id']);
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ $id = addslashes($_SESSION['usr_id']);
 		</div>
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
-				<?php if (isset($_SESSION['usr_id'])) { ?>
+				<?php if (isset($_SESSION["loggedin"])) { ?>
 				
 				<li><a href="logout.php">Log Out</a></li>
 				<?php } else { ?>
@@ -39,8 +39,7 @@ $id = addslashes($_SESSION['usr_id']);
 	</div>
 </nav>
 <div style="color: blue;" class="container-fluid">
-
-<h3>Welcome, <?php echo $_SESSION['usr_name']; ?></h3>
+<h3>Welcome, <?php echo $_SESSION["username"]; ?></h3>
 </div>
 
 <div style="width: 50px; height: 50px;"></div>

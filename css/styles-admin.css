@@ -35,11 +35,11 @@ nav{
     float: right; /*sign in and sign up floated to the right*/
   }
   
-  ul.topnav li a {
+  ul.topnav li a, ul.topnav li h3 {
     display: block;
   }
   
-  ul.topnav li a {
+  ul.topnav li a{
     display: block;
     text-decoration: none; /*get rid of underline*/
     font-size: 21px;
@@ -49,8 +49,25 @@ nav{
     /* font-family: 'Roboto Condensed', sans-serif; */
     color: rgb(246,76,114);
   }
+
+  li.topnav-right h3{
+    display: block;
+    text-decoration: none; /*get rid of underline*/
+    font-size: 23px;
+    font-weight: bold;
+    min-height:25px; /*can use font-size: 20px; as well*/
+    text-align: center;
+    padding: 14px;
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    color: rgb(246,76,114);
+  } 
   
   ul.topnav li a:hover{
+    /* background-color: #1C2321; */
+    background-color: #fff;
+    color: rgb(246,76,114);
+  }
+  ul.topnav li h3:hover{
     /* background-color: #1C2321; */
     background-color: #fff;
     color: rgb(246,76,114);
