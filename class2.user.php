@@ -1,9 +1,10 @@
 <?php 
-	require_once "config.php";
+	include_once "config.php";
     //include_once "register-oo-format" ;
-	class User2{
+	class User2 extends DBC{
         public function resetpassword($new_pass,$confirm_pass){
-            global $mysqli;
+           // global $mysqli;
+           $mysqli = $this->connect();
             // global $username_err;
             global $confirm_password_err;
             global $new_password_err;
@@ -13,11 +14,22 @@
            
             if(empty(trim($new_pass))){
                 $new_password_err = "Please enter the new password.";     
-            } elseif(strlen(trim($new_pass)) < 6){
+            } 
+            elseif(strlen(trim($new_pass)) < 6){
                 $new_password_err = "Password must have atleast 6 characters.";
-            } else{
-                $new_password = trim($new_pass);
             }
+             elseif(!preg_match("#[0-9]+#",$new_pass)) {
+                $new_password_err = "Your Password Must Contain At Least 1 Number!";
+            }
+            elseif(!preg_match("#[A-Z]+#",$new_pass)) {
+                $new_password_err = "Your Password Must Contain At Least 1 Capital Letter!";
+            }
+            elseif(!preg_match("#[a-z]+#",$new_pass)) {
+                $new_password_err = "Your Password Must Contain At Least 1 Lowercase Letter!";
+            }
+            else{
+                $new_password = trim($new_pass);
+            
             
             // Validate confirm password
             if(empty(trim($confirm_pass))){
@@ -28,6 +40,7 @@
                     $confirm_password_err = "Password did not match.";
                 }
             }
+        }
                 
             // Check input errors before updating the database
             if(empty($new_password_err) && empty($confirm_password_err)){

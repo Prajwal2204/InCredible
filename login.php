@@ -10,7 +10,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once "config.php";
+include_once "config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -21,6 +21,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $usr = $_POST["username"];
     $pass = $_POST["password"];
     // Check if username is empty
+    $hello = new DBC;
+    $mysqli = $hello->connect();
     if(empty(trim($usr))){
         $username_err = "Please enter username.";
     } else{

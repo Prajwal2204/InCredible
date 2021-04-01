@@ -1,18 +1,21 @@
 <?php 
-	require_once "config.php";
+	include_once "config.php";
     //include_once "register" ;
-	class User{
+	class User extends DBC{
 		//protected $db;
         
 		// public function __construct(){
 		// 	// global $mysqli;
 		// 	// $this->db = $mysqli;
 		// }
-
+        //$mysqli = $this->Dbconnect;
         
 
         public function registration($usr,$email,$pass,$cpass){
-            global $mysqli;
+            
+        $mysqli = $this->connect();
+  
+            //global $mysqli;
             global $username_err;
             global $email_err;
             global $confirm_password_err;
@@ -61,7 +64,7 @@
                     // echo("$email is a valid email address");
                     $emailid = trim($email);
                 } else{
-                    echo "$email is not a valid email address";
+                    $email_err = "$email is not a valid email address";
                 }
             }
 
@@ -70,7 +73,16 @@
                 $password_err = "Please enter a password.";     
             } elseif(strlen(trim($pass)) < 6){
                 $password_err = "Password must have atleast 6 characters.";
-            } else{
+            } elseif(!preg_match("#[0-9]+#",$pass)) {
+                $password_err = "Your Password Must Contain At Least 1 Number!";
+            }
+            elseif(!preg_match("#[A-Z]+#",$pass)) {
+                $password_err = "Your Password Must Contain At Least 1 Capital Letter!";
+            }
+            elseif(!preg_match("#[a-z]+#",$pass)) {
+                $password_err = "Your Password Must Contain At Least 1 Lowercase Letter!";
+            }
+            else{
                 $password = trim($pass);
             }
             
