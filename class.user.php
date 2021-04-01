@@ -2,13 +2,7 @@
 	include_once "config.php";
     //include_once "register" ;
 	class User extends DBC{
-		//protected $db;
-        
-		// public function __construct(){
-		// 	// global $mysqli;
-		// 	// $this->db = $mysqli;
-		// }
-        // $mysqli
+		
         
 
         public function registration($usr,$email,$pass,$cpass){

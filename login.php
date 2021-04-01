@@ -12,7 +12,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 // Include config file
 include_once "config.php";
  
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
 
