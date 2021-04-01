@@ -2,6 +2,10 @@
 session_start();
 include_once 'config.php';
 $id = addslashes($_SESSION["id"]);
+if(!isset($_SESSION["loggedin"])){
+    header("location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>

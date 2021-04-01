@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'config.php';
+if(!isset($_SESSION["loggedin"])){
+    header("location: login.php");
+    exit;
+}
 
 
 	$id = $_SESSION["id"];
