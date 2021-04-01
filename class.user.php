@@ -8,7 +8,7 @@
 		// 	// global $mysqli;
 		// 	// $this->db = $mysqli;
 		// }
-        //$mysqli = $this->Dbconnect;
+        // $mysqli
         
 
         public function registration($usr,$email,$pass,$cpass){

@@ -10,7 +10,7 @@ $username_err = $password_err = $email_err = $confirm_password_err = "";
 
     // global $mysqli; 
     
-    // global $username_err;
+    // global $username_err; 
     // global $confirm_password_err;
     // global $password_err;    
 if($_SERVER["REQUEST_METHOD"] == "POST"){

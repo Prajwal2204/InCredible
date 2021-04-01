@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'includes/dbconnect.php';
+include 'config.php';
 	
 	$success = "";
 
