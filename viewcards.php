@@ -1,7 +1,10 @@
 <?php
 session_start();
 include_once 'config.php';
-$id = addslashes($_SESSION["id"]);
+$usr = $_SESSION["username"];
+// $username = $_SESSION["username"];
+// $view = new DBC;
+// $mysqli = DBC->connect();
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;
@@ -38,9 +41,9 @@ if(!isset($_SESSION["loggedin"])){
 	<div class = "row">
 		<div class="col-2 sidenav">
 				<ul class="list-unstyled">
-					<li><a class="btn btn-outline-danger active" href="accountdetails.php"><b>Account Details</b></a></li>			
+					<li><a class="btn btn-outline-danger active" href="viewcards.php"><b>View Cards</b></a></li>			
 					<li><a class="btn btn-outline-danger" href="addcard.php"><b>Add Card</b></a></li>
-					<li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li>
+					<!-- <li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
 					<li><a class="btn btn-outline-danger" href="viewaccounts.php"><b>View accounts</b></a></li>
 					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>
@@ -52,54 +55,47 @@ if(!isset($_SESSION["loggedin"])){
 			<article class="row custom-left-pad">
 				<section class="col-lg-8 white-font">
 					<div class="page-header">
-						<h2>Account Details</h2>
+						<h2>Card Details</h2>
 					</div>
 			<?php
-			
-				
-				$ins_sql = "SELECT * FROM `accounts` WHERE id = '$id'";
+
+				$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+				$ins_sql = "SELECT * FROM `cards` WHERE username = '$usr' ";
 				$run_sql = mysqli_query($con, $ins_sql);
+			?>
+				<table class="table table-bordered">
+							<thead>
+							<tr class = "red-bg">
+								<td class = "white-font">Account name</td>
+								<td class = "white-font">Card Holder Name</td>
+								<td class = "white-font">Bank Name</td>
+								<td class = "white-font">Card Number</td>
+								<td class = "white-font">Card Type</td>
+								<td class = "white-font">Expiry Date</td>
+							</tr>
+							</thead>
+				<?php
 				while($rows = mysqli_fetch_array($run_sql)){
 
 					echo '
 
-						<table class="table table-bordered">
 							<tbody>
 							<tr>
-								<td>Account name</td>
-								<td>'.$rows['accname'].'</td>
-							</tr>
-							<tr>
-								<td>Account no</td>
-								<td>'.$rows['accno'].'</td>
-							</tr>
-							<tr>
-								<td>IFSC Code</td>
-								<td>'.$rows['accifsc'].'</td>
-							</tr>
-							<tr>
-								<td>Email-address</td>
-								<td>'.$rows['accemail'].'</td>
-							</tr>
-							<tr>
-								<td>Account type</td>
-								<td>'.$rows['acctype'].'</td>
-							</tr>
-							<tr>
-								<td>Account balance</td>
-								<td>'.$rows['accbalance'].'</td>
-							</tr>
-							<tr>
-								<td>Open date</td>
-								<td>'.$rows['accdate'].'</td>
+								<td class = "white-font">'.$rows['username'].'</td>
+								<td class = "white-font">'.$rows['name'].'</td>
+								<td class = "white-font">'.$rows['bank'].'</td>
+								<td class = "white-font">'.$rows['card_no'].'</td>
+								<td class = "white-font">'.$rows['card_type'].'</td>
+								<td class = "white-font">'.$rows['expiry_date'].'</td>
 							</tr>
 							</tbody>
-						</table>
+						
 						
 					';
 
 				}
 			?>
+			</table>
 	</div>
 </body>
 </html>

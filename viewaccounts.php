@@ -37,9 +37,9 @@ if(!isset($_SESSION["loggedin"])){
 	<div class = "row">	
 		<div class="col-2 sidenav">
 				<ul class="list-unstyled">
-					<li><a class="btn btn-outline-danger" href="accountdetails.php"><b>Account Details</b></a></li>			
+					<li><a class="btn btn-outline-danger" href="viewcards.php"><b>View Cards</b></a></li>			
 					<li><a class="btn btn-outline-danger" href="addcard.php"><b>Add Card</b></a></li>
-					<li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li>
+					<!-- <li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
 					<li><a class="btn btn-outline-danger active" href="viewaccounts.php"><b>View accounts</b></a></li>
 					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>

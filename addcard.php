@@ -45,9 +45,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<div class = "row">
 		<div class="col-2 sidenav">
 				<ul class="list-unstyled">
-					<li><a class="btn btn-outline-danger" href="accountdetails.php"><b>Account Details</b></a></li>			
+					<li><a class="btn btn-outline-danger" href="viewcards.php"><b>View Cards</b></a></li>			
 					<li><a class="btn btn-outline-danger active" href="addcard.php"><b>Add Card</b></a></li>
-					<li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li>
+					<!-- <li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
 					<li><a class="btn btn-outline-danger" href="viewaccounts.php"><b>View accounts</b></a></li>
 					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>
@@ -116,8 +116,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
-							<input type="submit" id="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">
-                        	<input type="reset" class="btn btn-secondary ml-2" value="Reset">	
+							<input type="submit" id="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">	
+							</div>
+							<label class="col-sm-3 control-label"></label>
+							<div class="col-sm-8">
+							<input type="reset" class="btn btn-block btn-danger" value="Reset">	
 							</div>
 						</div>
 						

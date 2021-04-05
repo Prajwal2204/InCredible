@@ -37,6 +37,7 @@ class cards extends DBC{
 		$ins_sql = "INSERT INTO cards(username, name, bank, card_no, cvv, card_type, expiry_date) VALUES ('".$username."', '".$name."', '".$bank."', '".$card_no."','".md5($cvv)."', '".$card_type."', '".$expiry_date."')";
 		//$conn = mysqli_connect('localhost', 'root', '', 'credit_card');
 		$run_sql = mysqli_query($mysqli,$ins_sql);
+		$_SESSION["card_no"] = $card_no;
 	}
         
     
