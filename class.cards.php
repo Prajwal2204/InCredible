@@ -33,7 +33,7 @@ class cards extends DBC{
                 $bankname_err = "Please enter a fullname";  
             }
             else{
-                if(!preg_match("/^[a-zA-Z'-]+$/", $bank)){
+                if(!preg_match("/^([a-zA-Z' ]+)$/",$bank)){
                     $bankname_err = "It should contain alphabets";
                 }
                 else{
@@ -45,7 +45,7 @@ class cards extends DBC{
                 $name_err = "Please enter a fullname";  
             }
             else{
-                if(!preg_match("/^[a-zA-Z'-]+$/", $accname)){
+                if(!preg_match("/^([a-zA-Z' ]+)$/",$accname)){
                     $name_err = "It should contain alphabets";
                 }
                 else{

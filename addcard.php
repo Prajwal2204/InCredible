@@ -83,14 +83,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<label for="number" class="col-sm-3 control-label">Card Number*</label>
 								<div class="col-sm-8">
 									<input type="text" name="cardno" class="form-control <?php echo (!empty($cardno_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cardno; ?>" 
-									placeholder="Enter 16-digit card number" id="cardnumber" >
+									placeholder="Enter 16-digit card number" id="cardnumber" maxlength = "16">
 									<span class="invalid-feedback"><?php echo $cardno_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">
 							<label for="date" class="col-sm-3 control-label">Valid Thru*</label>
 								<div class="col-sm-8">
-									<input type="date" name="expdate" class="form-control <?php echo (!empty($expirydate_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $expirydate; ?>"
+									<input type="date" name="expdate" id = "expire" class="form-control <?php echo (!empty($expirydate_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $expirydate; ?>"
 									placeholder="Expiry Date" id="expdate" >
 									<span class="invalid-feedback"><?php echo $expirydate_err; ?></span>
 								</div>
@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<label for="number" class="col-sm-3 control-label">CVV *</label>
 								<div class="col-sm-8">
 									<input type="password" name="acccvv" class="form-control <?php echo (!empty($cvv_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cvv; ?>" 
-									placeholder="Enter CVV" id="acccvv" >
+									placeholder="Enter CVV" id="acccvv" maxlength = "3">
 									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
 								</div>
 						</div>
@@ -128,5 +128,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 		</article></form></section></article></div>
+
+		<script>
+
+var today = new Date();
+
+var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+var x = document.forms["myForm"]["fname"];
+x.value = date;
+
+</script>
 </body>
 </html>
