@@ -6,8 +6,8 @@ $card = new cards;
 
 
 // Define variables and initialize with empty values
-$name = $bankname = $cardno  = $cvv = "";
-$name_err = $bankname_err = $cardno_err  = $cvv_err = "";
+$name = $bankname = $cardno  = $cvv = $expirydate = "" ;
+$name_err = $bankname_err = $cardno_err  = $cvv_err = $expirydate_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$card->add_card();
@@ -90,7 +90,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
 							<label for="date" class="col-sm-3 control-label">Valid Thru*</label>
 								<div class="col-sm-8">
-									<input type="date" name="expdate" class="form-control" placeholder="Expiry Date" id="expdate" >
+									<input type="date" name="expdate" class="form-control <?php echo (!empty($expirydate_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $expirydate; ?>"
+									placeholder="Expiry Date" id="expdate" >
+									<span class="invalid-feedback"><?php echo $expirydate_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">
