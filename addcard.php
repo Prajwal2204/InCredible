@@ -1,39 +1,40 @@
 <?php
 session_start();
-include 'config.php';
+include_once "config.php";
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;
 }
 
+
 	$success = "";
-
+	
 	if(isset($_POST['submit'])){
-
-		$accname = $_POST['accname'];
-		$cardno = $_POST['cardno'];
+		$username = $_SESSION["username"];
+		$name = $_POST['accname'];
+		$bank = $_POST['bank'];
+		$card_no = $_POST['cardno'];
 		// $accifsc = $_POST['accifsc'];
 		// $accemail = $_POST['accemail'];
 		// $accpassword = $_POST['accpassword'];
-		$acccvv = $_POST['acccvv'];
-		$cardtype = $_POST['cardtype'];
-		$accbalance = $_POST['accbalance'];
-		$expdate = $_POST['expdate'];
-		$accdate = date('y-m-d');
-		$ins_sql = "INSERT INTO cards(accname, cardno, acccvv, cardtype, accbalance, expdate, accdate) VALUES ('".$accname."', '".$cardno."','".md5($acccvv)."', '".$cardtype."', '".$accbalance."', '".$expdate."', '".$accdate."')";
+		$cvv = $_POST['acccvv'];
+		$card_type = $_POST['cardtype'];
+		$expiry_date = $_POST['expdate'];
+		$ins_sql = "INSERT INTO cards(username, name, bank, card_no, cvv, card_type, expiry_date) VALUES ('".$username."', '".$name."', '".$bank."', '".$card_no."','".md5($cvv)."', '".$card_type."', '".$expiry_date."')";
+		$conn = mysqli_connect('localhost', 'root', '', 'credit_card');
 		$run_sql = mysqli_query($conn,$ins_sql);
 
-		$temp = mysqli_affected_rows($conn);
-		if($temp>0){
+		// $temp = mysqli_affected_rows($conn);
+		// if($temp>0){
 
-			$in_sql = "INSERT INTO users(name, email, password) VALUES ('".$accname."', '".$email."', '".md5($pass)."')";
-			$ru_sql = mysqli_query($conn,$in_sql);
+		// 	// $in_sql = "INSERT INTO users(name, email, password) VALUES ('".$accname."', '".$email."', '".md5($pass)."')";
+		// 	// $ru_sql = mysqli_query($conn,$in_sql);
 
-			$success = "Card added successfully!";
-		}else{
+		// 	$success = "Card added successfully!";
+		// }else{
 
-			$success = "Something went wrong!";
-		}
+		// 	$success = "Something went wrong!";
+		// }
 
 	}
 ?>
@@ -83,11 +84,17 @@ if(!isset($_SESSION["loggedin"])){
 					<div class="page-header">
 						<h2>Add Card</h2>
 					</div>
-					<form class="form-horizontal" action="addaccount.php" method="post" role="form">
+					<form class="form-horizontal" action="addcard.php" method="post" role="form">
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Card Holder Name *</label>
 								<div class="col-sm-8">
 									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" required>
+								</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-3 control-label">Bank Name *</label>
+								<div class="col-sm-8">
+									<input type="text" name="bank" class="form-control" placeholder="Enter your Bank Name" id="bank" required>
 								</div>
 						</div>
 						<!-- <div class="form-group">
@@ -130,12 +137,6 @@ if(!isset($_SESSION["loggedin"])){
 										<option>RuPay</option>
 
 									</select>
-								</div>
-						</div>
-						<div class="form-group">
-							<label for="number" class="col-sm-3 control-label">Account balance*</label>
-								<div class="col-sm-8">
-									<input type="text" name="accbalance" class="form-control" placeholder="Enter the balance" id="accbalance" required>
 								</div>
 						</div>
 						<div class="form-group">
