@@ -23,19 +23,6 @@ if(!isset($_SESSION["loggedin"])){
 		$ins_sql = "INSERT INTO cards(username, name, bank, card_no, cvv, card_type, expiry_date) VALUES ('".$username."', '".$name."', '".$bank."', '".$card_no."','".md5($cvv)."', '".$card_type."', '".$expiry_date."')";
 		$conn = mysqli_connect('localhost', 'root', '', 'credit_card');
 		$run_sql = mysqli_query($conn,$ins_sql);
-
-		// $temp = mysqli_affected_rows($conn);
-		// if($temp>0){
-
-		// 	// $in_sql = "INSERT INTO users(name, email, password) VALUES ('".$accname."', '".$email."', '".md5($pass)."')";
-		// 	// $ru_sql = mysqli_query($conn,$in_sql);
-
-		// 	$success = "Card added successfully!";
-		// }else{
-
-		// 	$success = "Something went wrong!";
-		// }
-
 	}
 ?>
 <!DOCTYPE html>
