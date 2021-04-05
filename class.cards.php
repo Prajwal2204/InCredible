@@ -7,6 +7,9 @@ class cards extends DBC{
         session_start();
     }
 
+// // Define variables and initialize with empty values
+// $name = $bankname = $cardno  = $cvv = "";
+// $name_err = $bankname_err = $cardno_err  = $cvv_err = "";
     public function add_card(){
 
         
@@ -17,7 +20,11 @@ class cards extends DBC{
             exit;
         }
 
-        // $success = "";
+        global $name_err;
+        global $bankname_err;
+        global $cardno_err;
+        global $cvv_err;
+          
 	
 	if(isset($_POST['submit'])){
 		$username = $_SESSION["username"];

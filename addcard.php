@@ -61,47 +61,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<div class="page-header">
 						<h2>Add Card</h2>
 					</div>
-					<form class="form-horizontal" action="addcard.php" method="post" role="form">
+					<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" role="form">
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Card Holder Name *</label>
 								<div class="col-sm-8">
-									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" >
+									<input type="text" name="accname" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>"
+									placeholder="Enter your name" id="accname" >
+									<span class="invalid-feedback"><?php echo $name_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Bank Name *</label>
 								<div class="col-sm-8">
-									<input type="text" name="bank" class="form-control" placeholder="Enter your Bank Name" id="bank" >
+									<input type="text" name="bank" class="form-control <?php echo (!empty($bankname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $bankname; ?>"
+									placeholder="Enter your Bank Name" id="bank" >
+									<span class="invalid-feedback"><?php echo $bankname_err; ?></span>
 								</div>
 						</div>
-						<!-- <div class="form-group">
-					<label for="number" class="col-sm-3 control-label">Email-address *</label>
-						<div class="col-sm-8">
-							<input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
-						</div>
-				</div>
-				<div class="form-group">
-					<label for="number" class="col-sm-3 control-label">Password *</label>
-						<div class="col-sm-8">
-							<input type="password" name="accpassword" class="form-control" placeholder="Enter password" id="accpassword" required>
-						</div>
-				</div> -->
+					
 						<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">Card Number*</label>
 								<div class="col-sm-8">
-									<input type="text" name="cardno" class="form-control" placeholder="Enter 16-digit card number" id="cardnumber" required>
+									<input type="text" name="cardno" class="form-control <?php echo (!empty($cardno_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cardno; ?>" 
+									placeholder="Enter 16-digit card number" id="cardnumber" >
+									<span class="invalid-feedback"><?php echo $cardno_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">
 							<label for="date" class="col-sm-3 control-label">Valid Thru*</label>
 								<div class="col-sm-8">
-									<input type="date" name="expdate" class="form-control" placeholder="Expiry Date" id="expdate" required>
+									<input type="date" name="expdate" class="form-control" placeholder="Expiry Date" id="expdate" >
 								</div>
 						</div>
 						<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">CVV *</label>
 								<div class="col-sm-8">
-									<input type="password" name="acccvv" class="form-control" placeholder="Enter CVV" id="acccvv" required>
+									<input type="password" name="acccvv" class="form-control <?php echo (!empty($cvv_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cvv; ?>" 
+									placeholder="Enter CVV" id="acccvv" >
+									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">
@@ -120,13 +117,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
 							<input type="submit" id="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">
+                        	<input type="reset" class="btn btn-secondary ml-2" value="Reset">	
 							</div>
 						</div>
-						<!-- <div class="form-group">
-							<label class="col-sm-3 control-label"></label>
-							<div class="col-sm-8">
-							<h4><?php echo $success ?></h4>
-						</div> -->
+						
 			</div>
 					
 
