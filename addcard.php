@@ -11,14 +11,15 @@ if(!isset($_SESSION["loggedin"])){
 	if(isset($_POST['submit'])){
 
 		$accname = $_POST['accname'];
-		$accno = $_POST['accno'];
-		$accifsc = $_POST['accifsc'];
-		$accemail = $_POST['accemail'];
-		$accpassword = $_POST['accpassword'];
-		$acctype = $_POST['acctype'];
+		$cardno = $_POST['cardno'];
+		// $accifsc = $_POST['accifsc'];
+		// $accemail = $_POST['accemail'];
+		$acccvv = $_POST['acccvv'];
+		$cardtype = $_POST['cardtype'];
 		$accbalance = $_POST['accbalance'];
+		$expdate = $_POST['expdate'];
 		$accdate = date('y-m-d');
-		$ins_sql = "INSERT INTO accounts(accname, accno, accifsc, accemail, accpassword, acctype, accbalance, accdate) VALUES ('".$accname."', '".$accno."', '".$accifsc."', '".$accemail."', '".md5($accpassword)."', '".$acctype."', '".$accbalance."', '".$accdate."')";
+		$ins_sql = "INSERT INTO accounts(accname, cardno, acccvv, cardtype, accbalance, expdate, accdate) VALUES ('".$accname."', '".$cardno."','".md5($acccvv)."', '".$cardtype."', '".$accbalance."', '".$expdate."', '".$accdate."')";
 		$run_sql = mysqli_query($con,$ins_sql);
 
 		$temp = mysqli_affected_rows($con);
@@ -83,41 +84,37 @@ if(!isset($_SESSION["loggedin"])){
 					</div>
 					<form class="form-horizontal" action="addaccount.php" method="post" role="form">
 						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Full Name *</label>
+							<label for="name" class="col-sm-3 control-label">Card Holder Name *</label>
 								<div class="col-sm-8">
 									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" required>
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="number" class="col-sm-3 control-label">Account number*</label>
+							<label for="number" class="col-sm-3 control-label">Card Number*</label>
 								<div class="col-sm-8">
-									<input type="text" name="accno" class="form-control" placeholder="Enter account number" id="accnumber" required>
+									<input type="text" name="cardno" class="form-control" placeholder="Enter 16-digit card number" id="cardnumber" required>
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="number" class="col-sm-3 control-label">IFSC Code *</label>
+							<label for="date" class="col-sm-3 control-label">Valid Thru*</label>
 								<div class="col-sm-8">
-									<input type="text" name="accifsc" class="form-control" placeholder="Enter IFSC Code" id="accifsc" required>
+									<input type="date" name="expdate" class="form-control" placeholder="Expiry Date" id="expdate" required>
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="number" class="col-sm-3 control-label">Email-address *</label>
+							<label for="number" class="col-sm-3 control-label">CVV *</label>
 								<div class="col-sm-8">
-									<input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
+									<input type="password" name="acccvv" class="form-control" placeholder="Enter CVV" id="acccvv" required>
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="number" class="col-sm-3 control-label">Password *</label>
+							<label for="name" class="col-sm-3 control-label">Card Type *</label>
 								<div class="col-sm-8">
-									<input type="password" name="accpassword" class="form-control" placeholder="Enter password" id="accpassword" required>
-								</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Account type *</label>
-								<div class="col-sm-8">
-									<select class="form-control" name="acctype" id="acctype">
-										<option>Savings</option>
-										<option>Current</option>
+									<select class="form-control" name="cardtype" id="cardtype">
+										
+										<option>VISA</option>
+										<option>MasterCard</option>
+										<option>RuPay</option>
 
 									</select>
 								</div>
