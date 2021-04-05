@@ -1,29 +1,19 @@
 <?php
-session_start();
-include_once "config.php";
-if(!isset($_SESSION["loggedin"])){
-    header("location: login.php");
-    exit;
+
+
+include_once "class.cards.php" ;
+$card = new cards;
+
+
+// Define variables and initialize with empty values
+$name = $bankname = $cardno  = $cvv = "";
+$name_err = $bankname_err = $cardno_err  = $cvv_err = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	$card->add_card();
 }
 
 
-	$success = "";
-	
-	if(isset($_POST['submit'])){
-		$username = $_SESSION["username"];
-		$name = $_POST['accname'];
-		$bank = $_POST['bank'];
-		$card_no = $_POST['cardno'];
-		// $accifsc = $_POST['accifsc'];
-		// $accemail = $_POST['accemail'];
-		// $accpassword = $_POST['accpassword'];
-		$cvv = $_POST['acccvv'];
-		$card_type = $_POST['cardtype'];
-		$expiry_date = $_POST['expdate'];
-		$ins_sql = "INSERT INTO cards(username, name, bank, card_no, cvv, card_type, expiry_date) VALUES ('".$username."', '".$name."', '".$bank."', '".$card_no."','".md5($cvv)."', '".$card_type."', '".$expiry_date."')";
-		$conn = mysqli_connect('localhost', 'root', '', 'credit_card');
-		$run_sql = mysqli_query($conn,$ins_sql);
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,13 +65,13 @@ if(!isset($_SESSION["loggedin"])){
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Card Holder Name *</label>
 								<div class="col-sm-8">
-									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" required>
+									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" >
 								</div>
 						</div>
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Bank Name *</label>
 								<div class="col-sm-8">
-									<input type="text" name="bank" class="form-control" placeholder="Enter your Bank Name" id="bank" required>
+									<input type="text" name="bank" class="form-control" placeholder="Enter your Bank Name" id="bank" >
 								</div>
 						</div>
 						<!-- <div class="form-group">
@@ -132,11 +122,11 @@ if(!isset($_SESSION["loggedin"])){
 							<input type="submit" id="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
 							<h4><?php echo $success ?></h4>
-						</div>
+						</div> -->
 			</div>
 					
 

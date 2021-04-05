@@ -58,7 +58,7 @@
                     // echo("$email is a valid email address");
                     $emailid = trim($email);
                 } else{
-                    $email_err = "$email is not a valid email address";
+                    $email_err = $email ." is not a valid email address";
                 }
             }
 

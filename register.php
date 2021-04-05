@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "config.php";
+// require_once "config.php";
 include_once "class.user.php" ;
 $user = new User;
 
