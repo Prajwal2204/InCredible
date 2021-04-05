@@ -14,21 +14,22 @@ if(!isset($_SESSION["loggedin"])){
 		$cardno = $_POST['cardno'];
 		// $accifsc = $_POST['accifsc'];
 		// $accemail = $_POST['accemail'];
+		// $accpassword = $_POST['accpassword'];
 		$acccvv = $_POST['acccvv'];
 		$cardtype = $_POST['cardtype'];
 		$accbalance = $_POST['accbalance'];
 		$expdate = $_POST['expdate'];
 		$accdate = date('y-m-d');
-		$ins_sql = "INSERT INTO accounts(accname, cardno, acccvv, cardtype, accbalance, expdate, accdate) VALUES ('".$accname."', '".$cardno."','".md5($acccvv)."', '".$cardtype."', '".$accbalance."', '".$expdate."', '".$accdate."')";
-		$run_sql = mysqli_query($con,$ins_sql);
+		$ins_sql = "INSERT INTO cards(accname, cardno, acccvv, cardtype, accbalance, expdate, accdate) VALUES ('".$accname."', '".$cardno."','".md5($acccvv)."', '".$cardtype."', '".$accbalance."', '".$expdate."', '".$accdate."')";
+		$run_sql = mysqli_query($conn,$ins_sql);
 
-		$temp = mysqli_affected_rows($con);
+		$temp = mysqli_affected_rows($conn);
 		if($temp>0){
 
-			$in_sql = "INSERT INTO users(name, email, password) VALUES ('".$accname."', '".$accemail."', '".md5($accpassword)."')";
-			$ru_sql = mysqli_query($con,$in_sql);
+			$in_sql = "INSERT INTO users(name, email, password) VALUES ('".$accname."', '".$email."', '".md5($pass)."')";
+			$ru_sql = mysqli_query($conn,$in_sql);
 
-			$success = "Account added successfully!";
+			$success = "Card added successfully!";
 		}else{
 
 			$success = "Something went wrong!";
@@ -89,6 +90,18 @@ if(!isset($_SESSION["loggedin"])){
 									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" required>
 								</div>
 						</div>
+						<!-- <div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Email-address *</label>
+						<div class="col-sm-8">
+							<input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Password *</label>
+						<div class="col-sm-8">
+							<input type="password" name="accpassword" class="form-control" placeholder="Enter password" id="accpassword" required>
+						</div>
+				</div> -->
 						<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">Card Number*</label>
 								<div class="col-sm-8">
