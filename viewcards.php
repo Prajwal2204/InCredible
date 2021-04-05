@@ -72,6 +72,7 @@ if(!isset($_SESSION["loggedin"])){
 								<td class = "white-font">Card Number</td>
 								<td class = "white-font">Card Type</td>
 								<td class = "white-font">Expiry Date</td>
+								<td class = "white-font">Remove Card?</td>
 							</tr>
 							</thead>
 				<?php
@@ -87,6 +88,7 @@ if(!isset($_SESSION["loggedin"])){
 								<td class = "white-font">'.$rows['card_no'].'</td>
 								<td class = "white-font">'.$rows['card_type'].'</td>
 								<td class = "white-font">'.$rows['expiry_date'].'</td>
+								<td class = "white-font"><a href="#" class = "btn btn-danger">Remove</a></td>
 							</tr>
 							</tbody>
 						
