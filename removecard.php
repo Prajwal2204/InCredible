@@ -10,29 +10,31 @@ if(!isset($_SESSION["loggedin"])){
 
 	if(isset($_POST['submit'])){
 
-		$accno = $_POST['accno'];
-		$accemail = $_POST['accemail'];
+		$name = $_POST['accname'];
+		$card_no = $_POST['cardno'];
+		$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+		$ins_sql = "DELETE FROM cards WHERE name ='".$name."' AND card_no ='".$card_no."' ";
+		$run_sql = mysqli_query($con,$ins_sql);
+		// $i_sql = "SELECT * FROM cards WHERE name = '".$name."'";
+		// $r_sql = mysqli_query($con,$i_sql);
 
-		$i_sql = "SELECT * FROM accounts WHERE accno = '".$accno."'";
-		$r_sql = mysqli_query($con,$i_sql);
+		// $rows = mysqli_fetch_array($r_sql);
 
-		$rows = mysqli_fetch_array($r_sql);
+		// $email = $rows['accemail'];
 
-		$email = $rows['accemail'];
-
-		if($email==$accemail){
+		// if($email==$accemail){
 
 
-			$ins_sql = "DELETE FROM accounts WHERE accno ='".$accno."'";
-			$run_sql = mysqli_query($con,$ins_sql);
-			$in_sql = "DELETE FROM users WHERE email ='".$accemail."'";
-			$ru_sql = mysqli_query($con,$in_sql);
+		// 	$ins_sql = "DELETE FROM cards WHERE name ='".$name."'";
+		// 	$run_sql = mysqli_query($con,$ins_sql);
+		// 	// $in_sql = "DELETE FROM users WHERE email ='".$accemail."'";
+		// 	// $ru_sql = mysqli_query($con,$in_sql);
 
-			$success = "Account deleted successfully!";
-		}else{
+		// 	$success = "Account deleted successfully!";
+		// }else{
 
-			$success = "Account number and email does not match!";
-		}
+		// 	$success = "Account number and email does not match!";
+		// }
 
 	}
 ?>
@@ -83,17 +85,17 @@ if(!isset($_SESSION["loggedin"])){
 					<div class="page-header">
 						<h2>Remove Card</h2>
 					</div>
-					<form class="form-horizontal" action="deleteaccount.php" method="post" role="form">
+					<form class="form-horizontal" action="removecard.php" method="post" role="form">
 						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Card Number *</label>
+							<label for="name" class="col-sm-3 control-label">Card Holder Name *</label>
 								<div class="col-sm-8">
-									<input type="text" name="accno" class="form-control" placeholder="Enter Account number" id="accno" required>
+									<input type="text" name="accname" class="form-control" placeholder="Enter your name" id="accname" required>
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Email-address *</label>
+							<label for="name" class="col-sm-3 control-label">Card Number *</label>
 								<div class="col-sm-8">
-									<input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
+									<input type="text" name="cardno" class="form-control" placeholder="Enter 16-digit card number" id="cardno" required>
 								</div>
 						</div>
 						<div class="form-group">
