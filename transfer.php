@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config.php';
+$usr = $_SESSION["username"];
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;
@@ -12,46 +13,49 @@ if(!isset($_SESSION["loggedin"])){
 
 	if(isset($_POST['submit'])){
 
-			$name = $_POST['payee'];
-
-			$sql1 = "SELECT * FROM accounts WHERE accname = '$name'";
+			// $name = $_POST['payee'];
+			
+			
+			$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+			$sql1 = "SELECT * FROM cards WHERE username = '$usr'";
 			$run1 = mysqli_query($con, $sql1);
 
 			$row1 = mysqli_fetch_array($run1);
 
-			$accno = $row1['accno'];
-			$payeebalance = $row1['accbalance'];
+			$sender_card = $_POST['sendercard'];
+			$current_bal = $row1['acc_balance'];
+			$beneficiary_card = $_POST['beneficiarycard'];
 			$amount = $_POST['amount'];
 
 			if($amount>0){
 				
-					$total = $payeebalance + $amount;
+					// $total = $current_bal - $amount;
 
-					$sql2 = "UPDATE accounts
-								SET accbalance = $total
-								WHERE accno = '$accno'";
+					// $sql2 = "UPDATE cards
+					// 			SET acc_balance = $total
+					// 			WHERE card_no = '$sender_card'";
 
-					$run2 = mysqli_query($con, $sql2);
-					$date = date('y-m-d');
+					// $run2 = mysqli_query($con, $sql2);
+					// $date = date('y-m-d');
 
-					$sql3 = "SELECT * FROM accounts WHERE id = $id";
-					$run3 = mysqli_query($con, $sql3);
+					// $sql3 = "SELECT * FROM accounts WHERE id = $id";
+					// $run3 = mysqli_query($con, $sql3);
 
-					$row2 = mysqli_fetch_array($run3);
-					$owner_no = $row2['accno'];
-					$owner_balance = $row2['accbalance'];
+					// $row2 = mysqli_fetch_array($run3);
+					// $owner_no = $row2['accno'];
+					// $owner_balance = $row2['accbalance'];
 
-					if($owner_balance>=$amount){
+					if($current_bal>=$amount){
 
 
-						$owner_updated = $owner_balance - $amount;
+						$owner_updated = $current_bal - $amount;
 
-						$sql4 = "UPDATE accounts
-								SET accbalance = $owner_updated
-								WHERE accno = '$owner_no'";
+						$sql4 = "UPDATE cards
+								SET acc_balance = $owner_updated
+								WHERE card_no = '$sender_card'";
 						$run4 = mysqli_query($con, $sql4);
 
-						$sql5 = "INSERT INTO transactions(payee_name, amount, from_acc, trans_date) VALUES('".$name."', '".$amount."','".$owner_no."', '".$date."')";
+						$sql5 = "INSERT INTO transfer(sender_card, beneficiary_card, transfer_amt) VALUES('".$sender_card."', '".$beneficiary_card."','".$amount."')";
 						$run5 = mysqli_query($con, $sql5);
 
 						$success = "Transferred succesfully!";
@@ -124,7 +128,6 @@ if(!isset($_SESSION["loggedin"])){
 									<select class="form-control" name="sendercard" id="sendercard">
 									<?php 
 										$con = mysqli_connect('localhost', 'root', '', 'credit_card');
-										$usr = $_SESSION["username"];
 										$in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
 										$ru_sql = mysqli_query($con, $in_sql);
 
@@ -159,13 +162,13 @@ if(!isset($_SESSION["loggedin"])){
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Enter amount*</label>
 							<div class="col-sm-8">
-								<input type="number" name="amount" class="form-control" placeholder="Enter the balance" id="amount" maxlength = "5" required>
+								<input type="number" name="amount" class="form-control" placeholder="Enter the amount" id="amount" maxlength = "5" required>
 							</div>
 					</div>
 					<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">CVV *</label>
 								<div class="col-sm-8">
-									<input type="password" name="acccvv" class="form-control" placeholder="Enter your CVV" id="acccvv" maxlength = "3" required>
+									<input type="password" name="cvv" class="form-control" placeholder="Enter your CVV" id="cvv" maxlength = "3" required>
 									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
 								</div>
 					</div>
