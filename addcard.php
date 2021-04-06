@@ -6,8 +6,8 @@ $card = new add_cards;
 
 
 // Define variables and initialize with empty values
-$name = $bankname = $cardno  = $cvv = $expirydate = $cardtype = "" ;
-$name_err = $bankname_err = $cardno_err  = $cvv_err = $expirydate_err = $cardtype_err = "";
+$name = $bankname = $cardno  = $cvv = $expirydate = $cardtype = $accbalance = "" ;
+$name_err = $bankname_err = $cardno_err  = $cvv_err = $expirydate_err = $cardtype_err = $acc_balance_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$card->add_card();
@@ -101,6 +101,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 									<input type="password" name="acccvv" class="form-control <?php echo (!empty($cvv_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cvv; ?>" 
 									placeholder="Enter CVV" id="acccvv" maxlength = "3">
 									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
+								</div>
+						</div>
+						<div class="form-group">
+							<label for="number" class="col-sm-3 control-label">Account Balance*</label>
+								<div class="col-sm-8">
+									<input type="number" name="accbalance" class="form-control <?php echo (!empty($acc_balance_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $acc_balance; ?>" 
+									placeholder="Enter Account Balance" id="accbalance">
+									<span class="invalid-feedback"><?php echo $acc_balance_err; ?></span>
 								</div>
 						</div>
 						<div class="form-group">

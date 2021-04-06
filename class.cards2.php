@@ -76,6 +76,7 @@ class view_cards extends DBC{
 								<td class = "white-font">Card Number</td>
 								<td class = "white-font">Card Type</td>
 								<td class = "white-font">Expiry Date</td>
+								<td class = "white-font">Account Balance (INR)</td>
 								<td class = "white-font">Select</td>
 								<td class = "white-font">Remove Card?</td>
 							</tr>
@@ -99,6 +100,7 @@ class view_cards extends DBC{
 									<td class = "white-font">'.$rows['card_no'].'</td>
 									<td class = "white-font">'.$rows['card_type'].'</td>
 									<td class = "white-font">'.$rows['expiry_date'].'</td>
+									<td class = "white-font">'.$rows['acc_balance'].'</td>
 									<td class = "white-font"><input type = "checkbox" name = "removeKey" value = "'.$rows['card_no'].'" required></td>
 									<td class = "white-font"><input type = "submit" name = "removeCard" value = "Remove" class = "btn btn-danger"></td>
 								</form>

@@ -119,27 +119,29 @@ if(!isset($_SESSION["loggedin"])){
 						</div>
 					<form class="form-horizontal" action="transfer.php" method="post" role="form">
 						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Select a payee *</label>
+							<label for="name" class="col-sm-3 control-label">Select a Card *</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="payee" id="acctype">
+									<select class="form-control" name="sendercard" id="sendercard">
 									<?php 
-
-										$id = addslashes($_SESSION['usr_id']);
-										$in_sql = "SELECT * FROM accounts WHERE id = $id";
+										$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+										$usr = $_SESSION["username"];
+										$in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
 										$ru_sql = mysqli_query($con, $in_sql);
 
-										$rows = mysqli_fetch_array($ru_sql);
-										$from_acc = $rows['accno'];
+										// $rows = mysqli_fetch_array($ru_sql);
+										// $from_acc = $rows['accno'];
 
-										$ins_sql = "SELECT * FROM payee WHERE registered_in = '$from_acc'";
-										$run_sql = mysqli_query($con,$ins_sql);
+										// $ins_sql = "SELECT * FROM payee WHERE registered_in = '$from_acc'";
+										// $run_sql = mysqli_query($con,$ins_sql);
 
-									while($rows = mysqli_fetch_array($run_sql)){
+									while($rows = mysqli_fetch_array($ru_sql)){
 
 
 										echo '
-
-										<option>'.$rows['name'].'</option>
+										<option value="none" selected disabled hidden>
+          									Select a card to pay from
+      									</option>
+										<option>'.$rows['card_no'].'</option>
 
 											';
 										}
@@ -149,10 +151,23 @@ if(!isset($_SESSION["loggedin"])){
 									</select>
 					</div></div>
 					<div class="form-group">
+						<label for="number" class="col-sm-3 control-label">Beneficiary Card Number*</label>
+							<div class="col-sm-8">
+								<input type="text" name="beneficiarycard" class="form-control" placeholder="Enter card number" id="beneficiarycard" required>
+							</div>
+					</div>
+					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Enter amount*</label>
 							<div class="col-sm-8">
-								<input type="text" name="amount" class="form-control" placeholder="Enter the balance" id="amount" required>
+								<input type="number" name="amount" class="form-control" placeholder="Enter the balance" id="amount" maxlength = "5" required>
 							</div>
+					</div>
+					<div class="form-group">
+							<label for="number" class="col-sm-3 control-label">CVV *</label>
+								<div class="col-sm-8">
+									<input type="password" name="acccvv" class="form-control" placeholder="Enter your CVV" id="acccvv" maxlength = "3" required>
+									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
+								</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label"></label>

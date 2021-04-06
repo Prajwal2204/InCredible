@@ -67,6 +67,7 @@ class add_cards extends DBC{
             global $cvv_err;
             global $cardtype_err;
             global $expirydate_err;
+			global $acc_balance_err;
             $username = $_SESSION["username"];
             $accname = $_POST['accname'];
             $bank = $_POST['bank'];
@@ -74,6 +75,7 @@ class add_cards extends DBC{
             $cvv_code = $_POST['acccvv'];
             $card_type = $_POST['cardtype'];
             $expiry_date = $_POST['expdate'];
+			$acc_balance = $_POST['accbalance'];
 
         // validate bank name 
             if(empty(trim($bank))){
@@ -195,10 +197,17 @@ class add_cards extends DBC{
                     $expirydate = trim($expiry_date);
             }
 
+			// account balance validation
+			if(empty(trim($acc_balance))){
+				$acc_balance_err = "Please enter account balance.";
+			} else{
+				$accbalance = trim($acc_balance);
+			}
 
-            if(empty($name_err) && empty($bankname_err) && empty($cardno_err) && empty($cardtype_err) && empty($cvv_err) && empty($expirydate_err)){
 
-                $sql = "INSERT INTO cards (username, name, bank, card_no, cvv, card_type, expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            if(empty($name_err) && empty($bankname_err) && empty($cardno_err) && empty($cardtype_err) && empty($cvv_err) && empty($acc_balance_err) && empty($expirydate_err)){
+
+                $sql = "INSERT INTO cards (username, name, bank, card_no, cvv, card_type, acc_balance, expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 if($stmt = $mysqli->prepare($sql)){
                     // Set parameters
@@ -209,9 +218,10 @@ class add_cards extends DBC{
                     $param_cvv = password_hash($cvv, PASSWORD_DEFAULT); // Creates a password hash
                     $param_cardtype = $cardtype;
                     $param_expirydate = $expirydate;
+					$param_accbalance = $accbalance;
                     
                     // Bind variables to the prepared statement as parameters
-                    $stmt->bind_param("sssssss", $param_username, $param_name, $param_bankname, $param_cardno, $param_cvv, $param_cardtype, $param_expirydate);
+                    $stmt->bind_param("ssssssss", $param_username, $param_name, $param_bankname, $param_cardno, $param_cvv, $param_cardtype, $param_accbalance, $param_expirydate);
                     
                     // Attempt to execute the prepared statement
                     if($stmt->execute()){
