@@ -63,6 +63,31 @@ if(!isset($_SESSION["loggedin"])){
 				$ins_sql = "SELECT * FROM `cards` WHERE username = '$usr' ";
 				$run_sql = mysqli_query($con, $ins_sql);
 			?>
+			<?php
+				if(isset($_POST["removeCard"])){
+					$key = $_POST['removeKey'];
+
+					$check_sql = "SELECT * FROM `cards` WHERE card_no = '$key' ";
+					$run_check = mysqli_query($con, $check_sql);
+					if(mysqli_num_rows($run_check)>0){
+						$del_sql = "DELETE FROM `cards` WHERE card_no = '$key' ";
+						$run_del = mysqli_query($con, $del_sql);
+						?>
+						<div class = "alert alert-success">
+							<p>Record Deleted!</p>
+						</div>
+						<?php
+						 header("Location:viewcards.php");
+					}
+					else{
+						?>
+						<div class = "alert alert-warning">
+							<p>Record does not match!</p>
+						</div>
+						<?php
+					}
+				}
+			?>
 				<table class="table table-bordered">
 							<thead>
 							<tr class = "red-bg">
@@ -72,6 +97,7 @@ if(!isset($_SESSION["loggedin"])){
 								<td class = "white-font">Card Number</td>
 								<td class = "white-font">Card Type</td>
 								<td class = "white-font">Expiry Date</td>
+								<td class = "white-font">Select</td>
 								<td class = "white-font">Remove Card?</td>
 							</tr>
 							</thead>
@@ -82,13 +108,16 @@ if(!isset($_SESSION["loggedin"])){
 
 							<tbody>
 							<tr>
-								<td class = "white-font">'.$rows['username'].'</td>
-								<td class = "white-font">'.$rows['name'].'</td>
-								<td class = "white-font">'.$rows['bank'].'</td>
-								<td class = "white-font">'.$rows['card_no'].'</td>
-								<td class = "white-font">'.$rows['card_type'].'</td>
-								<td class = "white-font">'.$rows['expiry_date'].'</td>
-								<td class = "white-font"><a href="#" class = "btn btn-danger">Remove</a></td>
+								<form action = "" method = "post" role = "form">
+									<td class = "white-font">'.$rows['username'].'</td>
+									<td class = "white-font">'.$rows['name'].'</td>
+									<td class = "white-font">'.$rows['bank'].'</td>
+									<td class = "white-font">'.$rows['card_no'].'</td>
+									<td class = "white-font">'.$rows['card_type'].'</td>
+									<td class = "white-font">'.$rows['expiry_date'].'</td>
+									<td class = "white-font"><input type = "checkbox" name = "removeKey" value = "'.$rows['card_no'].'" required></td>
+									<td class = "white-font"><input type = "submit" name = "removeCard" value = "Remove" class = "btn btn-danger"></td>
+								</form>
 							</tr>
 							</tbody>
 						
