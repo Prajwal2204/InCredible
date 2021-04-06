@@ -2,10 +2,56 @@
 
 include_once "config.php";
 class add_cards extends DBC{
+    private $type;
     public function __construct()
     {
         session_start();
     }
+
+    public function validatecard($number)
+    {
+       
+   
+       $cardtype = array(
+           "VISA"       => "/^4[0-9]{12}(?:[0-9]{3})?$/",
+           "MasterCard" => "/^5[1-5][0-9]{14}$/",
+           "Amex"       => "/^3[47][0-9]{13}$/",
+           "Discover"   => "/^6(?:011|5[0-9]{2})[0-9]{12}$/",
+       );
+   
+       if (preg_match($cardtype['VISA'],$number))
+       {
+       $this->type= "VISA";
+           //return 'VISA';
+       
+       }
+       else if (preg_match($cardtype['MasterCard'],$number))
+       {
+       $this->type= "MasterCard";
+           //return 'MasterCard';
+       }
+       else if (preg_match($cardtype['Amex'],$number))
+       {
+       $this->type= "Amex";
+           //return 'Amex';
+       
+       }
+       else if (preg_match($cardtype['Discover'],$number))
+       {
+       $this->type= "Discover";
+           //return 'Discover';
+       }
+       else
+       {
+           $this->type = false;
+           //return false;
+       } 
+       return $this->type;
+    }
+    //  public function card_type_return(){
+    //      return $this->type;
+    //  }
+   
 
     public function add_card(){
             
@@ -19,13 +65,14 @@ class add_cards extends DBC{
             global $bankname_err;
             global $cardno_err;
             global $cvv_err;
+            global $cardtype_err;
             global $expirydate_err;
             $username = $_SESSION["username"];
             $accname = $_POST['accname'];
             $bank = $_POST['bank'];
             $card_no = $_POST['cardno'];
             $cvv_code = $_POST['acccvv'];
-            $cardtype = $_POST['cardtype'];
+            $card_type = $_POST['cardtype'];
             $expiry_date = $_POST['expdate'];
 
         // validate bank name 
@@ -77,12 +124,16 @@ class add_cards extends DBC{
                 $cardno_err = "Please enter a card number.";  
             }
 
-            elseif(strlen(trim($card_no))!=16){
-                $cardno_err = "card number must have  16 characters.";
+            elseif(!((strlen(trim($card_no))==15)|| (strlen(trim($card_no))==16)|| (strlen(trim($card_no))==13))){
+                $cardno_err = "card number must have either 13 or 15 or 16 characters.";
             }
 
             elseif(!preg_match("#[0-9]+#",$card_no)) {
                 $cardno_err = "Your card number Must Contain only Number!";
+            }
+            elseif(!($this->validatecard(trim($card_no)))){
+                $cardno_err = "Not A Valid CARD no.";				
+
             }
             
             else{
@@ -118,10 +169,21 @@ class add_cards extends DBC{
                 }
             }
 
+            // card type validation
+            if(empty(trim($card_type))){
+                $cardtype_err = "Please select proper card type";
+            }
+            else{
+                if(trim($card_type) == trim($this->type))
+                $cardtype = $this->type;
+                else 
+                $cardtype_err = "Not valid card";
+            }
+
 
         // date validation
             if(empty(trim($expiry_date))){
-                $email_err = "Please enter an date.";
+                $expirydate_err = "Please enter an date.";
             
             } else {
                 $date = new DateTime($expiry_date);
@@ -134,7 +196,7 @@ class add_cards extends DBC{
             }
 
 
-            if(empty($name_err) && empty($bankname_err) && empty($cardno_err) && empty($cvv_err) && empty($expirydate_err)){
+            if(empty($name_err) && empty($bankname_err) && empty($cardno_err) && empty($cardtype_err) && empty($cvv_err) && empty($expirydate_err)){
 
                 $sql = "INSERT INTO cards (username, name, bank, card_no, cvv, card_type, expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
