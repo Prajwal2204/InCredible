@@ -1,20 +1,20 @@
 <?php 
 
 include_once "config.php";
-class cards extends DBC{
+class add_cards extends DBC{
     public function __construct()
     {
         session_start();
     }
 
     public function add_card(){
-            $mysqli = $this->connect();
+            
 
             if(!isset($_SESSION["loggedin"])){
                 header("location: login.php");
                 exit;
             }
-
+            $mysqli = $this->connect();
             global $name_err;
             global $bankname_err;
             global $cardno_err;
@@ -103,7 +103,9 @@ class cards extends DBC{
                         
                         if($stmt->num_rows == 1){
                             $cardno_err = "This card number is already taken.";
-                        } else{
+                        } 
+                        
+                        else{
                             $cardno = trim($card_no);
                         }
                     } 

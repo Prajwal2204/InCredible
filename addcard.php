@@ -2,7 +2,7 @@
 
 
 include_once "class.cards.php" ;
-$card = new cards;
+$card = new add_cards;
 
 
 // Define variables and initialize with empty values

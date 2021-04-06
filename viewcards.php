@@ -1,14 +1,16 @@
 <?php
-session_start();
-include_once 'config.php';
-$usr = $_SESSION["username"];
-// $username = $_SESSION["username"];
-// $view = new DBC;
-// $mysqli = DBC->connect();
-if(!isset($_SESSION["loggedin"])){
-    header("location: login.php");
-    exit;
-}
+// session_start();//
+// include_once 'config.php'; //
+// $usr = $_SESSION["username"];
+// if(!isset($_SESSION["loggedin"])){
+    // header("location: login.php");
+	
+include_once "class.cards2.php";
+
+	
+$view	 = new view_cards;
+    // exit;
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,85 +51,12 @@ if(!isset($_SESSION["loggedin"])){
 					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>
 				</ul>
 		</div>
+<?php
 
-		<div class="col-8 container">
-		<div style="width: 50px; height: 50px;"></div>
-			<article class="row custom-left-pad">
-				<section class="col-lg-8 white-font">
-					<div class="page-header">
-						<h2>Card Details</h2>
-					</div>
-			<?php
-
-				$con = mysqli_connect('localhost', 'root', '', 'credit_card');
-				$ins_sql = "SELECT * FROM `cards` WHERE username = '$usr' ";
-				$run_sql = mysqli_query($con, $ins_sql);
-			?>
-			<?php
-				if(isset($_POST["removeCard"])){
-					$key = $_POST['removeKey'];
-
-					$check_sql = "SELECT * FROM `cards` WHERE card_no = '$key' ";
-					$run_check = mysqli_query($con, $check_sql);
-					if(mysqli_num_rows($run_check)>0){
-						$del_sql = "DELETE FROM `cards` WHERE card_no = '$key' ";
-						$run_del = mysqli_query($con, $del_sql);
-						?>
-						<div class = "alert alert-success">
-							<p>Record Deleted!</p>
-						</div>
-						<?php
-						 header("Location:viewcards.php");
-					}
-					else{
-						?>
-						<div class = "alert alert-warning">
-							<p>Record does not match!</p>
-						</div>
-						<?php
-					}
-				}
-			?>
-				<table class="table table-bordered">
-							<thead>
-							<tr class = "red-bg">
-								<td class = "white-font">Account name</td>
-								<td class = "white-font">Card Holder Name</td>
-								<td class = "white-font">Bank Name</td>
-								<td class = "white-font">Card Number</td>
-								<td class = "white-font">Card Type</td>
-								<td class = "white-font">Expiry Date</td>
-								<td class = "white-font">Select</td>
-								<td class = "white-font">Remove Card?</td>
-							</tr>
-							</thead>
-				<?php
-				while($rows = mysqli_fetch_array($run_sql)){
-
-					echo '
-
-							<tbody>
-							<tr>
-								<form action = "" method = "post" role = "form">
-									<td class = "white-font">'.$rows['username'].'</td>
-									<td class = "white-font">'.$rows['name'].'</td>
-									<td class = "white-font">'.$rows['bank'].'</td>
-									<td class = "white-font">'.$rows['card_no'].'</td>
-									<td class = "white-font">'.$rows['card_type'].'</td>
-									<td class = "white-font">'.$rows['expiry_date'].'</td>
-									<td class = "white-font"><input type = "checkbox" name = "removeKey" value = "'.$rows['card_no'].'" required></td>
-									<td class = "white-font"><input type = "submit" name = "removeCard" value = "Remove" class = "btn btn-danger"></td>
-								</form>
-							</tr>
-							</tbody>
-						
-						
-					';
-
-				}
-			?>
-			</table>
-	</div>
+	//$mysqli = new mysqli('localhost', 'root', '', 'credit_card');
+	$view->view_card();
+			
+?>
+</div>
 </body>
 </html>
-

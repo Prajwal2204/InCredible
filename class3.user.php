@@ -75,11 +75,14 @@ class login_in extends DBC{
                                     $login_err = "Invalid username or password.";
                                 }
                             }
-                        } else{
+                        } 
+                        else{
                             // Username doesn't exist, display a generic error message
                             $login_err = "Invalid username or password.";
                         }
-                    } else{
+                    } 
+                    
+                    else{
                         echo "Oops! Something went wrong. Please try again later.";
                     }
         
