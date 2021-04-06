@@ -6,8 +6,8 @@ $card = new add_cards;
 
 
 // Define variables and initialize with empty values
-$name = $bankname = $cardno  = $cvv = $expirydate = "" ;
-$name_err = $bankname_err = $cardno_err  = $cvv_err = $expirydate_err = "";
+$name = $bankname = $cardno  = $cvv = $expirydate = $cardtype = "" ;
+$name_err = $bankname_err = $cardno_err  = $cvv_err = $expirydate_err = $cardtype_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$card->add_card();
@@ -104,13 +104,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="name" class="col-sm-3 control-label">Card Type *</label>
+							<label for="name" class="col-sm-3 control-label" >Card Type *</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="cardtype" id="cardtype">
-										
+									<select class="form-control <?php echo (!empty($cardtype_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cardtype; ?>" name="cardtype" id="cardtype">
+									<span class="invalid-feedback"><?php echo $cardtype_err; ?></span>	
 										<option>VISA</option>
 										<option>MasterCard</option>
-										<option>RuPay</option>
+										<option>Amex</option>
+										<option>Discover</option>
 
 									</select>
 								</div>
