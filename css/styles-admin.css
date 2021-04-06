@@ -169,9 +169,15 @@ nav{
     align-items: center;
 }
 
+.red-bg{
+  background-color: #dc3545;
+}
+
 .white-font{
   color: #fff;
 }
+
+
 
 .custom-left-pad{
   padding-left:25%;
