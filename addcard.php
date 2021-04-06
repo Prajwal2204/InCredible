@@ -83,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<label for="number" class="col-sm-3 control-label">Card Number*</label>
 								<div class="col-sm-8">
 									<input type="text" name="cardno" class="form-control <?php echo (!empty($cardno_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cardno; ?>" 
-									placeholder="Enter 16-digit card number" id="cardnumber" maxlength = "16">
+									placeholder="Enter 16-digit card number" id="cardnumber"  maxlength = "16">
 									<span class="invalid-feedback"><?php echo $cardno_err; ?></span>
 								</div>
 						</div>
@@ -106,8 +106,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">Account Balance*</label>
 								<div class="col-sm-8">
-									<input type="number" name="accbalance" class="form-control <?php echo (!empty($acc_balance_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $acc_balance; ?>" 
-									placeholder="Enter Account Balance" id="accbalance">
+									<input type="text" name="accbalance" class="form-control <?php echo (!empty($acc_balance_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $accbalance; ?>" 
+									placeholder="Enter Account Balance" id="accbalance" maxlength = "6">
 									<span class="invalid-feedback"><?php echo $acc_balance_err; ?></span>
 								</div>
 						</div>

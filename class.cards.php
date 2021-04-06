@@ -76,6 +76,22 @@ class add_cards extends DBC{
             $card_type = $_POST['cardtype'];
             $expiry_date = $_POST['expdate'];
 			$acc_balance = $_POST['accbalance'];
+        
+        // validate account balance
+        if(empty(trim($acc_balance))){
+            $acc_balance_err = "Please enter a account number!";  
+        }
+        else{
+            if(!preg_match("#[0-9]+#",$acc_balance)){
+                $acc_balance_err = "It should contain only numeric values";
+            }
+            elseif(!(($acc_balance>10)&&($acc_balance<100000))){
+                $acc_balance_err = "Please enter values within 10 and 100000";
+            }
+            else{
+                    $accbalance = trim($acc_balance);
+            }
+        }
 
         // validate bank name 
             if(empty(trim($bank))){
@@ -197,13 +213,6 @@ class add_cards extends DBC{
                     $expirydate = trim($expiry_date);
             }
 
-			// account balance validation
-			if(empty(trim($acc_balance))){
-				$acc_balance_err = "Please enter account balance.";
-			} else{
-				$accbalance = trim($acc_balance);
-			}
-
 
             if(empty($name_err) && empty($bankname_err) && empty($cardno_err) && empty($cardtype_err) && empty($cvv_err) && empty($acc_balance_err) && empty($expirydate_err)){
 
@@ -221,7 +230,7 @@ class add_cards extends DBC{
 					$param_accbalance = $accbalance;
                     
                     // Bind variables to the prepared statement as parameters
-                    $stmt->bind_param("ssssssss", $param_username, $param_name, $param_bankname, $param_cardno, $param_cvv, $param_cardtype, $param_accbalance, $param_expirydate);
+                    $stmt->bind_param("ssssssis", $param_username, $param_name, $param_bankname, $param_cardno, $param_cvv, $param_cardtype, $param_accbalance, $param_expirydate);
                     
                     // Attempt to execute the prepared statement
                     if($stmt->execute()){
