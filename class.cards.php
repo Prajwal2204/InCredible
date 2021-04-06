@@ -71,26 +71,6 @@ class cards extends DBC{
                 }
             }
 
-<<<<<<< HEAD
-        global $name_err;
-        global $bankname_err;
-        global $cardno_err;
-        global $cvv_err;
-          
-	
-	if(isset($_POST['submit'])){
-		$username = $_SESSION["username"];
-		$name = $_POST['accname'];
-		$bank = $_POST['bank'];
-		$card_no = $_POST['cardno'];
-		$cvv = $_POST['acccvv'];
-		$card_type = $_POST['cardtype'];
-		$expiry_date = $_POST['expdate'];
-		$ins_sql = "INSERT INTO cards(username, name, bank, card_no, cvv, card_type, expiry_date) VALUES ('".$username."', '".$name."', '".$bank."', '".$card_no."','".md5($cvv)."', '".$card_type."', '".$expiry_date."')";
-		//$conn = mysqli_connect('localhost', 'root', '', 'credit_card');
-		$run_sql = mysqli_query($mysqli,$ins_sql);
-	}
-=======
             
         // card number validation
             if(empty(trim($card_no))){
@@ -130,7 +110,6 @@ class cards extends DBC{
                     else{
                         echo "Oops! Something went wrong. Please try again later.";
                     }
->>>>>>> b373b726d75d5ccce3683dd365622d48f0fe087e
         
                     // Close statement
                     $stmt->close();
