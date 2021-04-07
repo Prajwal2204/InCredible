@@ -77,7 +77,7 @@
                 $password_err = "Your Password Must Contain At Least 1 Lowercase Letter!";
             }
             else{
-                $password = trim($pass);
+                $password1 = trim($pass);
             }
             
             // Validate confirm password
@@ -85,7 +85,7 @@
                 $confirm_password_err = "Please confirm password.";     
             } else{
                 $confirm_password = trim($cpass);
-                if(empty($password_err) && ($password != $confirm_password)){
+                if(empty($password_err) && ($password1 != $confirm_password)){
                     $confirm_password_err = "Password did not match.";
                 }
             }
@@ -101,7 +101,7 @@
                     // Set parameters
                     $param_username = $username;
                     $param_emailid = $emailid;
-                    $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+                    $param_password = password_hash($password1, PASSWORD_DEFAULT); // Creates a password hash
 
                     // Bind variables to the prepared statement as parameters
                     $stmt->bind_param("sss", $param_username, $param_emailid, $param_password);

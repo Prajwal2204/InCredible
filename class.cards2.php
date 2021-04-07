@@ -26,7 +26,7 @@ class view_cards extends DBC{
 				$stmt->bind_param("s",$key);
 				$stmt->execute();
 				$stmt->store_result();
-				if($stmt->affected_rows > 0){
+				if($stmt->affected_rows >= 0){
 					$del_sql = "DELETE FROM cards WHERE card_no = ? ";
 					if($stmt2 = $mysqli->prepare($del_sql)){
 						$stmt2->bind_param("s",$key);

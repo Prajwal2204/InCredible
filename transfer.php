@@ -1,73 +1,17 @@
 <?php
-session_start();
-include 'config.php';
-$usr = $_SESSION["username"];
-if(!isset($_SESSION["loggedin"])){
-    header("location: login.php");
-    exit;
-}
+
+include_once "class.transfer.php";
+$tranfer = new transfer_money;
+
+$sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $amount_err = $amount_value = $cvv_err = $cvv_no = "";
 
 
-	$id = $_SESSION["id"];
 	$success = "";
 
 	if(isset($_POST['submit'])){
-
-			// $name = $_POST['payee'];
-			
-			
-			$con = mysqli_connect('localhost', 'root', '', 'credit_card');
-			$sql1 = "SELECT * FROM cards WHERE username = '$usr'";
-			$run1 = mysqli_query($con, $sql1);
-
-			$row1 = mysqli_fetch_array($run1);
-
-			$sender_card = $_POST['sendercard'];
-			$current_bal = $row1['acc_balance'];
-			$beneficiary_card = $_POST['beneficiarycard'];
-			$amount = $_POST['amount'];
-
-			if($amount>0){
-				
-					// $total = $current_bal - $amount;
-
-					// $sql2 = "UPDATE cards
-					// 			SET acc_balance = $total
-					// 			WHERE card_no = '$sender_card'";
-
-					// $run2 = mysqli_query($con, $sql2);
-					// $date = date('y-m-d');
-
-					// $sql3 = "SELECT * FROM accounts WHERE id = $id";
-					// $run3 = mysqli_query($con, $sql3);
-
-					// $row2 = mysqli_fetch_array($run3);
-					// $owner_no = $row2['accno'];
-					// $owner_balance = $row2['accbalance'];
-
-					if($current_bal>=$amount){
+		$tranfer->transfer_fund();
 
 
-						$owner_updated = $current_bal - $amount;
-
-						$sql4 = "UPDATE cards
-								SET acc_balance = $owner_updated
-								WHERE card_no = '$sender_card'";
-						$run4 = mysqli_query($con, $sql4);
-
-						$sql5 = "INSERT INTO transfer(sender_card, beneficiary_card, transfer_amt) VALUES('".$sender_card."', '".$beneficiary_card."','".$amount."')";
-						$run5 = mysqli_query($con, $sql5);
-
-						$success = "Transferred succesfully!";
-					}else{
-
-						$success = "You don't have enough balance!";
-					}
-
-			}else{
-
-				$success = "Don't be smart!";
-			}
 
 			
 
@@ -125,50 +69,37 @@ if(!isset($_SESSION["loggedin"])){
 						<div class="form-group">
 							<label for="name" class="col-sm-3 control-label">Select a Card *</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="sendercard" id="sendercard">
-									<?php 
-										$con = mysqli_connect('localhost', 'root', '', 'credit_card');
-										$in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
-										$ru_sql = mysqli_query($con, $in_sql);
-
-										// $rows = mysqli_fetch_array($ru_sql);
-										// $from_acc = $rows['accno'];
-
-										// $ins_sql = "SELECT * FROM payee WHERE registered_in = '$from_acc'";
-										// $run_sql = mysqli_query($con,$ins_sql);
-
-									while($rows = mysqli_fetch_array($ru_sql)){
-
-
-										echo '
-										<option value="none" selected disabled hidden>
-          									Select a card to pay from
-      									</option>
-										<option>'.$rows['card_no'].'</option>
-
-											';
-										}
-
-								?>
+									<select class="form-control  <?php echo (!empty($sendercard_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $sender_card; ?>"
+									 name="sendercard" id="sendercard" >
+									  <?php 
+									 	$tranfer->add_options();
+								?> 
 
 									</select>
+									<span class="invalid-feedback"><?php echo $sendercard_err; ?></span>
+									
 					</div></div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Beneficiary Card Number*</label>
 							<div class="col-sm-8">
-								<input type="text" name="beneficiarycard" class="form-control" placeholder="Enter card number" id="beneficiarycard" required>
+								<input type="text" name="beneficiarycard" class="form-control <?php echo (!empty($beneficiarycard_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $beneficiary_card; ?>"
+								 placeholder="Enter card number" id="beneficiarycard" maxlength = "16" >
+								 <span class="invalid-feedback"><?php echo $beneficiarycard_err; ?></span>
 							</div>
 					</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Enter amount*</label>
 							<div class="col-sm-8">
-								<input type="number" name="amount" class="form-control" placeholder="Enter the amount" id="amount" maxlength = "5" required>
+								<input type="text" name="amount" class="form-control <?php echo (!empty($amount_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $amount_value; ?>"
+								 placeholder="Enter the amount" id="amount" maxlength = "5" >
+								 <span class="invalid-feedback"><?php echo $amount_err; ?></span>
 							</div>
 					</div>
 					<div class="form-group">
 							<label for="number" class="col-sm-3 control-label">CVV *</label>
 								<div class="col-sm-8">
-									<input type="password" name="cvv" class="form-control" placeholder="Enter your CVV" id="cvv" maxlength = "3" required>
+									<input type="password" name="cvv" class="form-control <?php echo (!empty($cvv_err)) ? 'is-invalid' : ''; ?>"
+									 placeholder="Enter your CVV" id="cvv" maxlength = "3" >
 									<span class="invalid-feedback"><?php echo $cvv_err; ?></span>
 								</div>
 					</div>

@@ -142,13 +142,13 @@ class add_cards extends DBC{
                 $cardno_err = "Please enter a card number.";  
             }
 
+            elseif(!preg_match("#[0-9]+#",$card_no)) {
+                $cardno_err = "Your card number Must Contain only Number!";
+            }
             elseif(!((strlen(trim($card_no))==15)|| (strlen(trim($card_no))==16)|| (strlen(trim($card_no))==13))){
                 $cardno_err = "card number must have either 13 or 15 or 16 characters.";
             }
 
-            elseif(!preg_match("#[0-9]+#",$card_no)) {
-                $cardno_err = "Your card number Must Contain only Number!";
-            }
             elseif(!($this->validatecard(trim($card_no)))){
                 $cardno_err = "Not A Valid CARD no.";				
 
@@ -224,7 +224,8 @@ class add_cards extends DBC{
                     $param_name = $name;
                     $param_bankname = $bankname;
                     $param_cardno = $cardno;
-                    $param_cvv = password_hash($cvv, PASSWORD_DEFAULT); // Creates a password hash
+                    
+                    $param_cvv = md5($cvv); // Creates a password hash
                     $param_cardtype = $cardtype;
                     $param_expirydate = $expirydate;
 					$param_accbalance = $accbalance;
