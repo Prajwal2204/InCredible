@@ -1,12 +1,17 @@
 <?php
-session_start();
-include_once 'config.php';
-$usr = $_SESSION["username"];
-// $holder_name = $_POST['accname'];
-if(!isset($_SESSION["loggedin"])){
-    header("location: login.php");
-    exit;
-}
+// session_start();
+// include_once 'config.php';
+// $usr = $_SESSION["username"];
+// // $holder_name = $_POST['accname'];
+// if(!isset($_SESSION["loggedin"])){
+//     header("location: login.php");
+//     exit;
+// }
+
+include_once "class.transactions.php";
+
+	
+$dis = new transactions;
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,56 +73,15 @@ if(!isset($_SESSION["loggedin"])){
 									</tr>
 								</thead>
 			<?php
-
-				$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+			$dis->display();
+				// $con = mysqli_connect('localhost', 'root', '', 'credit_card');
 				// $in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
 				// $ru_sql = mysqli_query($con, $in_sql);
 
 				// $rows = mysqli_fetch_array($ru_sql);
 				// $card = $rows['card_no'];
 
-				$ins_sql = "SELECT * FROM `transfer` WHERE username = '$usr'";
-				$run_sql = mysqli_query($con, $ins_sql);
-
 				
-				while($rows = mysqli_fetch_array($run_sql)){
-					
-					if($rows['transaction_type']=='DEBITED'){
-						echo '
-
-							<tbody>
-									<tr>
-										<td class="white-font">'.$rows['sender_card'].'</td>
-										<td class="white-font">'.$rows['transaction_type'].'</td>
-										<td class="white-font">'.$rows['beneficiary_card'].'</td>
-										<td class="white-font">'.$rows['beneficiary_name'].'</td>
-										<td class="white-font">-</td>
-										<td class="white-font">'.$rows['transfer_amt'].'</td>
-										<td class="white-font">'.$rows['time_of_transaction'].'</td>
-									</tr>
-							</tbody>
-							
-						';
-					}
-					elseif($rows['transaction_type']=='CREDITED'){
-						echo '
-
-						<tbody>
-								<tr>
-									<td class="white-font">'.$rows['sender_card'].'</td>
-									<td class="white-font">'.$rows['transaction_type'].'</td>
-									<td class="white-font">'.$rows['beneficiary_card'].'</td>
-									<td class="white-font">-</td>
-									<td class="white-font">'.$usr.'</td>
-									<td class="white-font">'.$rows['transfer_amt'].'</td>
-									<td class="white-font">'.$rows['time_of_transaction'].'</td>
-								</tr>
-						</tbody>
-						
-						';
-					}
-
-				}
 			?>
 			</table></section></article></div>
 </body>
