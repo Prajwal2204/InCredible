@@ -59,7 +59,10 @@ class transfer_money extends DBC{
         elseif(!((strlen(trim($beneficiarycard))==15)|| (strlen(trim($beneficiarycard))==16)|| (strlen(trim($beneficiarycard))==13))){
             $beneficiarycard_err = "card number must have either 13 or 15 or 16 characters.";
         }
-
+        elseif(!(strcmp($beneficiarycard, $_POST['sendercard'])))
+        {
+            $beneficiarycard_err = "NOT possible to transfer amount from sender to sender it would be redundant!";
+        }
         elseif(!($this->validatecard(trim($beneficiarycard)))){
             $beneficiarycard_err = "Not A Valid CARD no.";				
 
@@ -196,9 +199,9 @@ class transfer_money extends DBC{
                 $stmt2->free_result();
                 $stmt2->close();
                 
-                $sql5 = "INSERT INTO transfer(sender_card, beneficiary_card, beneficiary_name, transfer_amt) VALUES(?,?,?,?)";
+                $sql5 = "INSERT INTO transfer(username, sender_card, beneficiary_card, beneficiary_name, transfer_amt) VALUES(?,?,?,?,?)";
                 $stmt2 = $mysqli->prepare($sql5);
-                $stmt2->bind_param("sssi",$sender_card,$beneficiary_card,$beneficiary_name,$amount_value);
+                $stmt2->bind_param("ssssi",$user,$sender_card,$beneficiary_card,$beneficiary_name,$amount_value);
                 $stmt2->execute();
                 $stmt2->free_result();
                 $stmt2->close();
@@ -215,10 +218,10 @@ class transfer_money extends DBC{
                     $current_balance_amount = $row1['acc_balance'];
                     $sum_amount = $current_balance_amount + $amount_value;
                     $sql7 = "UPDATE cards SET acc_balance = ? WHERE card_no = ?";
-                    $sql8 = "INSERT INTO transfer(sender_card, beneficiary_card, beneficiary_name, transfer_amt,transaction_type) VALUES(?,?,?,?,?)";
+                    $sql8 = "INSERT INTO transfer(username, sender_card, beneficiary_card, beneficiary_name, transfer_amt,transaction_type) VALUES(?,?,?,?,?,?)";
                     $stmt4 = $mysqli->prepare($sql8);
                     $transaction_type = "CREDITED";
-                    $stmt4->bind_param("sssis",$beneficiary_card,$beneficiary_name,$sender_card,$amount_value,$transaction_type);
+                    $stmt4->bind_param("ssssis",$user,$beneficiary_card,$sender_card,$beneficiary_name,$amount_value,$transaction_type);
                     $stmt4->execute();
                     $stmt4->free_result();
                     $stmt4->close();

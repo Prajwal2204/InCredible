@@ -57,9 +57,10 @@ if(!isset($_SESSION["loggedin"])){
 						<table class="table table-bordered">
 								<thead>
 									<tr class = "red-bg">
-										<th class="white-font">Payee Card</th>
-										<th class="white-font">Beneficiary Card</th>
-										<th class="white-font">Beneficiary Name</th>
+										<th class="white-font">Card 1</th>
+										<th class="white-font">Transaction Type</th>
+										<th class="white-font">Card 2</th>
+										<th class="white-font">Name</th>
 										<th class="white-font">Amount</th>
 										<th class="white-font">Transaction Timestamp</th>
 									</tr>
@@ -73,25 +74,44 @@ if(!isset($_SESSION["loggedin"])){
 				// $rows = mysqli_fetch_array($ru_sql);
 				// $card = $rows['card_no'];
 
-				$ins_sql = "SELECT * FROM `transfer`";
+				$ins_sql = "SELECT * FROM `transfer` WHERE username = '$usr'";
 				$run_sql = mysqli_query($con, $ins_sql);
 
 				
 				while($rows = mysqli_fetch_array($run_sql)){
+					
+					if($rows['transaction_type']=='DEBITED'){
+						echo '
 
-					echo '
+							<tbody>
+									<tr>
+										<td class="white-font">'.$rows['sender_card'].'</td>
+										<td class="white-font">'.$rows['transaction_type'].'</td>
+										<td class="white-font">'.$rows['beneficiary_card'].'</td>
+										<td class="white-font">'.$rows['beneficiary_name'].'</td>
+										<td class="white-font">'.$rows['transfer_amt'].'</td>
+										<td class="white-font">'.$rows['time_of_transaction'].'</td>
+									</tr>
+							</tbody>
+							
+						';
+					}
+					elseif($rows['transaction_type']=='CREDITED'){
+						echo '
 
 						<tbody>
 								<tr>
 									<td class="white-font">'.$rows['sender_card'].'</td>
+									<td class="white-font">'.$rows['transaction_type'].'</td>
 									<td class="white-font">'.$rows['beneficiary_card'].'</td>
-									<td class="white-font">'.$rows['beneficiary_name'].'</td>
+									<td class="white-font">-</td>
 									<td class="white-font">'.$rows['transfer_amt'].'</td>
 									<td class="white-font">'.$rows['time_of_transaction'].'</td>
 								</tr>
 						</tbody>
 						
-					';
+						';
+					}
 
 				}
 			?>
