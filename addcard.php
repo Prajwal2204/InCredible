@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<li><a class="btn btn-outline-danger active" href="addcard.php"><b>Add Card</b></a></li>
 					<!-- <li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
-					<li><a class="btn btn-outline-danger" href="viewaccounts.php"><b>View accounts</b></a></li>
+					<!-- <li><a class="btn btn-outline-danger" href="viewaccounts.php"><b>View accounts</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transfer.php"><b>Transfer Amount</b></a></li>
 				</ul>
 		</div>

@@ -32,7 +32,7 @@ class transactions extends DBC{
 							<tbody>
 									<tr>
 										<td class="white-font">'.$rows['sender_card'].'</td>
-										<td class="white-font">'.$rows['transaction_type'].'</td>
+										<td class="white-font red-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#dc3545;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font">'.$rows['beneficiary_name'].'</td>
 										<td class="white-font">-</td>
@@ -49,7 +49,7 @@ class transactions extends DBC{
 						<tbody>
 								<tr>
 									<td class="white-font">'.$rows['sender_card'].'</td>
-									<td class="white-font">'.$rows['transaction_type'].'</td>
+									<td class="white-font green-arrow fas fa-arrow-alt-circle-up d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 									<td class="white-font">'.$rows['beneficiary_card'].'</td>
 									<td class="white-font">-</td>
 									<td class="white-font">'.$_SESSION["username"].'</td>

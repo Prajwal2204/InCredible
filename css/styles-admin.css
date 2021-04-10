@@ -177,7 +177,13 @@ nav{
   color: #fff;
 }
 
+.green-arrow{
+  color: #0FFF50;
+}
 
+.red-arrow{
+  color: #dc3545;
+}
 
 .custom-left-pad{
   padding-left:25%;
