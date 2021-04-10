@@ -190,14 +190,19 @@ class transfer_money extends DBC{
                 $result3 = $stmt2->get_result();
 
                 if(($result3->num_rows)==1)
-                {
-                
-                    
-
+                {   
                     $row1 = $result3->fetch_assoc();
                     $current_balance_amount = $row1['acc_balance'];
                     $sum_amount = $current_balance_amount + $amount_value;
                     $sql7 = "UPDATE cards SET acc_balance = ? WHERE card_no = ?";
+                    $sql8 = "INSERT INTO transfer(sender_card, beneficiary_card, transfer_amt,transaction_type) VALUES(?,?,?,?)";
+                    $stmt4 = $mysqli->prepare($sql8);
+                    $transaction_type = "CREDITED";
+                    $stmt4->bind_param("ssis",$beneficiary_card,$sender_card,$amount_value,$transaction_type);
+                    $stmt4->execute();
+                    $stmt4->free_result();
+                    $stmt4->close();
+
                     $stmt3 = $mysqli->prepare($sql7);
                     $stmt3->bind_param("is",$sum_amount,$beneficiary_card);
                     $stmt3->execute();
