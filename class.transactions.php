@@ -19,7 +19,7 @@ class transactions extends DBC{
 
 
 
-        $sql1 = "SELECT * FROM transfer WHERE username = ?";
+        $sql1 = "SELECT * FROM transfer WHERE username = ? and time_of_transaction <= now() - interval 1 day;";
         if($stmt = $mysqli->prepare($sql1)){
             $stmt->bind_param("s",$_SESSION["username"]);
             $stmt->execute();
@@ -35,7 +35,7 @@ class transactions extends DBC{
 										<td class="white-font">'.$rows['transaction_type'].'</td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font">'.$rows['beneficiary_name'].'</td>
-										<td class="white-font">-</td>
+										<td class="white-font"><b>ME</b></td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -51,7 +51,7 @@ class transactions extends DBC{
 									<td class="white-font">'.$rows['sender_card'].'</td>
 									<td class="white-font">'.$rows['transaction_type'].'</td>
 									<td class="white-font">'.$rows['beneficiary_card'].'</td>
-									<td class="white-font">-</td>
+									<td class="white-font"><b>SELF</b></td>
 									<td class="white-font">'.$_SESSION["username"].'</td>
 									<td class="white-font">'.$rows['transfer_amt'].'</td>
 									<td class="white-font">'.$rows['time_of_transaction'].'</td>
