@@ -40,7 +40,7 @@ class login_in extends DBC{
             // Validate credentials
             if(empty($username_err) && empty($password_err)){
                 // Prepare a select statement
-                $sql = "SELECT id, username, password FROM users WHERE username = ?";
+                $sql = "SELECT username, password FROM users WHERE username = ?";
                 
                 if($stmt = $mysqli->prepare($sql)){
                     // Bind variables to the prepared statement as parameters
@@ -57,7 +57,7 @@ class login_in extends DBC{
                         // Check if username exists, if yes then verify password
                         if($stmt->num_rows == 1){                    
                             // Bind result variables
-                            $stmt->bind_result($id, $username, $hashed_password);
+                            $stmt->bind_result($username, $hashed_password);
                             if($stmt->fetch()){
                                 if(password_verify($password, $hashed_password)){
                                     // Password is correct, so start a new session
@@ -65,7 +65,7 @@ class login_in extends DBC{
                                     
                                     // Store data in session variables
                                     $_SESSION["loggedin"] = true;
-                                    $_SESSION["id"] = $id;
+                                    // $_SESSION["id"] = $id;
                                     $_SESSION["username"] = $username;                            
                                     
                                     // Redirect user to welcome page

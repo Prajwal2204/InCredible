@@ -22,7 +22,7 @@
                
             } else{
                 // Prepare a select statement
-                $sql = "SELECT id FROM users WHERE username = ?";
+                $sql = "SELECT * FROM users WHERE username = ?";
                 
                 if($stmt = $mysqli->prepare($sql)){
                     // Bind variables to the prepared statement as parameters

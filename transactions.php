@@ -2,6 +2,7 @@
 session_start();
 include_once 'config.php';
 $usr = $_SESSION["username"];
+// $holder_name = $_POST['accname'];
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;
@@ -60,7 +61,8 @@ if(!isset($_SESSION["loggedin"])){
 										<th class="white-font">Card 1</th>
 										<th class="white-font">Transaction Type</th>
 										<th class="white-font">Card 2</th>
-										<th class="white-font">Name</th>
+										<th class="white-font">Beneficiary Name</th>
+										<th class="white-font">Sender Name</th>
 										<th class="white-font">Amount</th>
 										<th class="white-font">Transaction Timestamp</th>
 									</tr>
@@ -89,6 +91,7 @@ if(!isset($_SESSION["loggedin"])){
 										<td class="white-font">'.$rows['transaction_type'].'</td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font">'.$rows['beneficiary_name'].'</td>
+										<td class="white-font">-</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -105,6 +108,7 @@ if(!isset($_SESSION["loggedin"])){
 									<td class="white-font">'.$rows['transaction_type'].'</td>
 									<td class="white-font">'.$rows['beneficiary_card'].'</td>
 									<td class="white-font">-</td>
+									<td class="white-font">'.$usr.'</td>
 									<td class="white-font">'.$rows['transfer_amt'].'</td>
 									<td class="white-font">'.$rows['time_of_transaction'].'</td>
 								</tr>
