@@ -216,12 +216,13 @@ class transfer_money extends DBC{
                 {   
                     $row1 = $result3->fetch_assoc();
                     $current_balance_amount = $row1['acc_balance'];
+                    $current_username = $row1['username'];
                     $sum_amount = $current_balance_amount + $amount_value;
                     $sql7 = "UPDATE cards SET acc_balance = ? WHERE card_no = ?";
                     $sql8 = "INSERT INTO transfer(username, sender_card, beneficiary_card, beneficiary_name, transfer_amt,transaction_type) VALUES(?,?,?,?,?,?)";
                     $stmt4 = $mysqli->prepare($sql8);
                     $transaction_type = "CREDITED";
-                    $stmt4->bind_param("ssssis",$user,$beneficiary_card,$sender_card,$beneficiary_name,$amount_value,$transaction_type);
+                    $stmt4->bind_param("ssssis",$current_username,$beneficiary_card,$sender_card,$beneficiary_name,$amount_value,$transaction_type);
                     $stmt4->execute();
                     $stmt4->free_result();
                     $stmt4->close();
