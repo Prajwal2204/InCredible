@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'config.php';
-$id = addslashes($_SESSION["id"]);
+$usr = $_SESSION["username"];
 if(!isset($_SESSION["loggedin"])){
     header("location: login.php");
     exit;
@@ -56,31 +56,40 @@ if(!isset($_SESSION["loggedin"])){
 					</div>
 						<table class="table table-bordered">
 								<thead>
-									<th class="white-font">Payee name</th>
-									<th class="white-font">Amount</th>
-									<th class="white-font">Transaction date</th>
-									</thead>
+									<tr class = "red-bg">
+										<th class="white-font">Payee Card</th>
+										<th class="white-font">Beneficiary Card</th>
+										<th class="white-font">Beneficiary Name</th>
+										<th class="white-font">Amount</th>
+										<th class="white-font">Transaction Timestamp</th>
+									</tr>
+								</thead>
 			<?php
-			
-				$in_sql = "SELECT * FROM accounts WHERE id = $id";
-				$ru_sql = mysqli_query($con, $in_sql) or die( mysqli_error($con));
 
-				$rows = mysqli_fetch_array($ru_sql);
-				$accno = $rows['accno'];
+				$con = mysqli_connect('localhost', 'root', '', 'credit_card');
+				// $in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
+				// $ru_sql = mysqli_query($con, $in_sql);
 
-				$ins_sql = "SELECT * FROM `transactions` WHERE from_acc = '$accno'";
-				$run_sql = mysqli_query($con, $ins_sql) or die(mysqli_error($con));
+				// $rows = mysqli_fetch_array($ru_sql);
+				// $card = $rows['card_no'];
+
+				$ins_sql = "SELECT * FROM `transfer`";
+				$run_sql = mysqli_query($con, $ins_sql);
+
+				
 				while($rows = mysqli_fetch_array($run_sql)){
 
 					echo '
 
 						<tbody>
 								<tr>
-									<td>'.$rows['payee_name'].'</td>
-									<td>'.$rows['amount'].'</td>
-									<td>'.$rows['trans_date'].'</td>
+									<td class="white-font">'.$rows['sender_card'].'</td>
+									<td class="white-font">'.$rows['beneficiary_card'].'</td>
+									<td class="white-font">'.$rows['beneficiary_name'].'</td>
+									<td class="white-font">'.$rows['transfer_amt'].'</td>
+									<td class="white-font">'.$rows['time_of_transaction'].'</td>
 								</tr>
-								</tbody>
+						</tbody>
 						
 					';
 

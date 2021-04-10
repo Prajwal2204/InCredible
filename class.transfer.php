@@ -71,6 +71,22 @@ class transfer_money extends DBC{
         return $beneficiarycard_err;
 
     }
+
+    public function error_checking_name($beneficiaryname){
+
+        global $beneficiaryname_err;
+
+        if(empty(trim($beneficiaryname))){
+            $beneficiaryname_err = "Please enter a fullname";  
+        }
+        elseif(!preg_match("/^([a-zA-Z' ]+)$/",$beneficiaryname)){
+            $name_err = "It should contain alphabets";
+        }else{
+                $beneficiaryname_err = "";
+        }
+
+        return $beneficiaryname_err;
+    }
     
     public function transfer_fund(){
            //global $mysqli = $this->connect();
@@ -84,7 +100,7 @@ class transfer_money extends DBC{
         //$cards = new add_cards;
 
 
-        global $sendercard_err, $beneficiarycard_err, $amount_err, $cvv_err, $success;
+        global $sendercard_err, $beneficiarycard_err, $beneficiaryname_err, $amount_err, $cvv_err, $success;
         // $sendercard_err = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $amount_err = $amount_value = $cvv_err = $cvv_no ;
 
 
@@ -94,10 +110,14 @@ class transfer_money extends DBC{
 
         $mysqli = $this->connect();
         $beneficiarycard = $_POST['beneficiarycard'];
+        $beneficiaryname = $_POST['beneficiaryname'];
         $amount = $_POST['amount'];
         $cvv_code = $_POST["cvv"];
         if(empty($this->error_checking($beneficiarycard))){
             $beneficiary_card = trim($beneficiarycard);
+        }
+        if(empty($this->error_checking_name($beneficiaryname))){
+            $beneficiary_name = trim($beneficiaryname);
         }
         if(empty($_POST['sendercard'])){
             $sendercard_err = "Please choose one of the card";
@@ -150,7 +170,7 @@ class transfer_money extends DBC{
 
 
 
-        if(empty($beneficiarycard_err)&&empty($sendercard_err)&&empty($cvv_err)&&empty($amount_err)){
+        if(empty($beneficiarycard_err)&&empty($beneficiaryname_err)&&empty($sendercard_err)&&empty($cvv_err)&&empty($amount_err)){
             
         
         $sql2 = "SELECT * FROM cards WHERE card_no = ?";
@@ -176,9 +196,9 @@ class transfer_money extends DBC{
                 $stmt2->free_result();
                 $stmt2->close();
                 
-                $sql5 = "INSERT INTO transfer(sender_card, beneficiary_card, transfer_amt) VALUES(?,?,?)";
+                $sql5 = "INSERT INTO transfer(sender_card, beneficiary_card, beneficiary_name, transfer_amt) VALUES(?,?,?,?)";
                 $stmt2 = $mysqli->prepare($sql5);
-                $stmt2->bind_param("ssi",$sender_card,$beneficiary_card,$amount_value);
+                $stmt2->bind_param("sssi",$sender_card,$beneficiary_card,$beneficiary_name,$amount_value);
                 $stmt2->execute();
                 $stmt2->free_result();
                 $stmt2->close();
@@ -195,10 +215,10 @@ class transfer_money extends DBC{
                     $current_balance_amount = $row1['acc_balance'];
                     $sum_amount = $current_balance_amount + $amount_value;
                     $sql7 = "UPDATE cards SET acc_balance = ? WHERE card_no = ?";
-                    $sql8 = "INSERT INTO transfer(sender_card, beneficiary_card, transfer_amt,transaction_type) VALUES(?,?,?,?)";
+                    $sql8 = "INSERT INTO transfer(sender_card, beneficiary_card, beneficiary_name, transfer_amt,transaction_type) VALUES(?,?,?,?,?)";
                     $stmt4 = $mysqli->prepare($sql8);
                     $transaction_type = "CREDITED";
-                    $stmt4->bind_param("ssis",$beneficiary_card,$sender_card,$amount_value,$transaction_type);
+                    $stmt4->bind_param("sssis",$beneficiary_card,$beneficiary_name,$sender_card,$amount_value,$transaction_type);
                     $stmt4->execute();
                     $stmt4->free_result();
                     $stmt4->close();

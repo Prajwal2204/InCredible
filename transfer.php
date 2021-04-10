@@ -3,7 +3,7 @@
 include_once "class.transfer.php";
 $tranfer = new transfer_money;
 
-$sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $amount_err = $amount_value = $cvv_err = $cvv_no = "";
+$sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $beneficiaryname_err = $beneficiary_name = $amount_err = $amount_value = $cvv_err = $cvv_no = "";
 
 
 	$success = "";
@@ -87,6 +87,14 @@ $sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $amou
 								 <span class="invalid-feedback"><?php echo $beneficiarycard_err; ?></span>
 							</div>
 					</div>
+					<div class="form-group">
+							<label for="name" class="col-sm-3 control-label">Beneficiary Name *</label>
+								<div class="col-sm-8">
+									<input type="text" name="beneficiaryname" class="form-control <?php echo (!empty($beneficiaryname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $beneficiary_name; ?>"
+									placeholder="Enter beneficiary name" id="beneficiaryname" >
+									<span class="invalid-feedback"><?php echo $beneficiaryname_err; ?></span>
+								</div>
+						</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Enter amount*</label>
 							<div class="col-sm-8">
