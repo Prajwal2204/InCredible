@@ -57,7 +57,7 @@ nav{
     font-weight: bold;
     min-height:25px; /*can use font-size: 20px; as well*/
     text-align: center;
-    /* padding: 1px; */
+    padding: 1px;
     /* font-family: 'Roboto Condensed', sans-serif; */
     color: #dc3545;
   } 

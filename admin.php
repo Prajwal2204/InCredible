@@ -11,7 +11,7 @@ if(!isset($_SESSION["loggedin"])){
 <head>
 	<title>InCredible</title>
 	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "css/styles-admin.css">
+    <link rel = "stylesheet" href = "css/styles-admin-actual.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 

@@ -33,7 +33,7 @@ $sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $bene
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
 			<li><a href="admin.php">Home</a></li>
 			<?php if (isset($_SESSION["username"])) { ?>
-			<li class = "topnav-right"><h3>Welcome, <?php echo $_SESSION["username"]; ?></h3></li>
+			<li class = "topnav-right"><a href="profile.php"><h3><?php echo $_SESSION["username"]; ?></h3></a></li>
 			<?php } else { ?>
 				<li class = "topnav-right"><h3>Welcome</h3></li>
 				<?php } ?>
