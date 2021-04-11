@@ -10,7 +10,8 @@ include_once "class.profile.php";
 
 $view = new profile;
 $usr = $_SESSION['username'];
-$user_name = $email_id = $phone_no = "";
+$full_name = $email_id = $phone_no = "";
+$email_err = $phone_err = $fullname_err = "";
 
 $view->view_profile();
 
@@ -52,25 +53,28 @@ $view->view_profile();
 						</div>
 					<form class="form-horizontal" action="profile.php" method="post" role="form">
                     <div class="form-group">
-						<label for="number" class="col-sm-3 control-label">Username</label>
+						<label for="number" class="col-sm-3 control-label">FULL NAME</label>
 							<div class="col-sm" class="form-control">
-								<!-- <input type="text" name="username" class="form-control" value="#Enter username from db, no need to change"
-								id="usrname"> -->
-								<?php echo $_SESSION["username"]; ?>
+								<input type="text" name="name" class="form-control <?php echo (!empty($fullname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlentities($full_name); ?>"
+								id="fullname">
+								<span class="invalid-feedback"><?php echo $fullname_err; ?></span>
+								
 							</div>
 					</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Email ID*</label>
 							<div class="col-sm">
-								<input type="email" name="emailid" class="form-control" value="<?php echo htmlentities($email_id);?>"
-								id="email">
+								<input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlentities($email_id);?>" id="email">
+                        		<span class="invalid-feedback"><?php echo $email_err; ?></span>
+								
 							</div>
 					</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Phone Number*</label>
 							<div class="col-sm">
-								<input type="text" name="number" class="form-control" value="<?php echo htmlentities($phone_no);?>"
+								<input type="text" name="number" class="form-control <?php echo (!empty($phone_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlentities($phone_no);?>"
 								id="number">
+								<span class="invalid-feedback"><?php echo $phone_err; ?></span>
 							</div>
 					</div>
 					
