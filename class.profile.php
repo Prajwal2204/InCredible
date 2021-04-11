@@ -17,9 +17,9 @@ class profile extends DBC{
         }
 
         $mysqli = $this->connect();
-        error_reporting(E_ERROR | E_PARSE);
+        // error_reporting(E_ERROR | E_PARSE);
 
-        global $user_name,$email_id,$phone_no,$email_err,$phone_err, $fullname_err;
+        global $full_name,$email_id,$phone_no,$email_err,$phone_err, $fullname_err;
         $email = $_POST["email"];
         $phone = $_POST["number"];
         $full = $_POST["name"];
@@ -63,14 +63,14 @@ class profile extends DBC{
         $usr = $_SESSION["username"];
 
 
-        $this->get_details();
+        // $this->get_details();
         if(empty($email_id_err) && empty($fullname_err) && empty($phone_err)){
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
            // $username = $_POST["username"];
-           $email = $_POST["email"];
-           $phone = $_POST["number"];
-           $full = $_POST["name"];
+        //    $email = $_POST["email"];
+        //    $phone = $_POST["number"];
+        //    $full = $_POST["name"];
    
 
             $sql = "UPDATE users SET  fullname = ?, emailid=?, phone_no = ?  WHERE username = ?";
