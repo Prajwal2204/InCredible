@@ -90,6 +90,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 								<input type="submit" id="submit" name="submit" value = "Save Changes" class="btn btn-block btn-primary">
 							</div>
 					</div>
+					<div style="width: 20px; height: 20px;"></div>
+					<a href = "reset-password.php" class = "btn btn-danger col-sm">Reset Password</a>
 				</div>
 				</form>
                 <div class = "col-lg-2"></div>
