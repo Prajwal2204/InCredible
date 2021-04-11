@@ -58,36 +58,37 @@ class view_cards extends DBC{
 
 		
 			
-		echo'
-		<div class="col-8 container">
-		<div style="width: 50px; height: 50px;"></div>
-			<article class="row custom-left-pad">
-			<section class="col-lg-8 white-font">
-				<div class="page-header">
-					<h2>Card Details</h2>
-					</div>
-			
-				<table class="table table-bordered">
-							<thead>
-							<tr class = "red-bg">
-								
-								<td class = "white-font">Card Holder Name</td>
-								<td class = "white-font">Bank Name</td>
-								<td class = "white-font">Card Number</td>
-								<td class = "white-font">Card Type</td>
-								<td class = "white-font">Expiry Date</td>
-								<td class = "white-font">Account Balance (INR)</td>
-								<td class = "white-font">Select</td>
-								<td class = "white-font">Remove Card?</td>
-							</tr>
-							</thead>';
+
 							
 			$sql = "SELECT * FROM cards  WHERE username = ?";
 			if($stmt = $mysqli->prepare($sql)){
 				$stmt->bind_param("s",$usr);
 				$stmt->execute();								
 				$result = $stmt->get_result();
-				if($result->num_rows > 0){                    
+				if($result->num_rows > 0){    
+					echo'
+					<div class="col-8 container">
+					<div style="width: 50px; height: 50px;"></div>
+						<article class="row custom-left-pad">
+						<section class="col-lg-8 white-font">
+							<div class="page-header">
+								<h2>Card Details</h2>
+								</div>
+						
+							<table class="table table-bordered">
+										<thead>
+										<tr class = "red-bg">
+											
+											<td class = "white-font">Card Holder Name</td>
+											<td class = "white-font">Bank Name</td>
+											<td class = "white-font">Card Number</td>
+											<td class = "white-font">Card Type</td>
+											<td class = "white-font">Expiry Date</td>
+											<td class = "white-font">Account Balance (INR)</td>
+											<td class = "white-font">Select</td>
+											<td class = "white-font">Remove Card?</td>
+										</tr>
+										</thead>';                
 					while ($rows = $result->fetch_assoc())	{
 						echo '
 
@@ -112,7 +113,7 @@ class view_cards extends DBC{
                     echo'</table>';								
                 } 
 				else{
-					echo "<b>NO RECORD FOR " .$usr."</b>";
+					echo "<b><h1 ></h1>NO RECORD FOR " .$usr."<h1></b>";
 				}
 				$stmt->free_result();
 				/* close statement */

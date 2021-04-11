@@ -108,4 +108,53 @@ class profile extends DBC{
         //return $result;
 
     }
+
+    public function display_cards(){
+        $mysqli = $this->connect();
+
+        $sql = "SELECT * FROM cards  WHERE username = ?";
+        if($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param("s",$_SESSION['username']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if($result->num_rows){
+            echo '	<table class="table table-bordered">
+                    <thead>
+                    <tr class = "red-bg">
+                        
+                        <td class = "white-font">Card Holder Name</td>
+                        <td class = "white-font">Bank Name</td>
+                        <td class = "white-font">Card Number</td>
+                        <td class = "white-font">Card Type</td>
+                        <td class = "white-font">Expiry Date</td>
+                        <td class = "white-font">Account Balance (INR)</td>
+                    </tr>
+                    </thead>
+                    ';
+                while($rows = $result->fetch_assoc()){
+                    echo '
+                    <tbody>
+                    <tr>
+                        <form action = "" method = "post" role = "form">
+                            
+                            <td class = "white-font">'.$rows['name'].'</td>
+                            <td class = "white-font">'.$rows['bank'].'</td>
+                            <td class = "white-font">'.$rows['card_no'].'</td>
+                            <td class = "white-font">'.$rows['card_type'].'</td>
+                            <td class = "white-font">'.$rows['expiry_date'].'</td>
+                            <td class = "white-font">'.$rows['acc_balance'].'</td>
+                        </form>
+                    </tr>
+                    </tbody>
+                    ';
+                }
+                echo'</table>';
+            }
+            $stmt->free_result();
+            $stmt->close();
+        }
+        $mysqli->close();
+    }
+
 }

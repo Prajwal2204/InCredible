@@ -90,17 +90,7 @@ $dis = new transactions;
 					</form>
 						<div style="width: 20px; height: 30px;"></div>
 						<table class="table table-bordered">
-								<!-- <thead>
-									<tr class = "red-bg">
-										<th class="white-font">Card 1</th>
-										<th class="white-font">Transaction Type</th>
-										<th class="white-font">Card 2</th>
-										<th class="white-font">Beneficiary</th>
-										<th class="white-font">Sender</th>
-										<th class="white-font">Amount</th>
-										<th class="white-font">Transaction Timestamp</th>
-									</tr>
-								</thead> -->
+
 			<?php
 			$dis->display();
 				

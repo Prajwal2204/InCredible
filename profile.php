@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 							<h2>Your Cards</h2>
 						</div>
                         <div style="width: 25px; height: 25px;"></div>
-                    <table class="table table-bordered">
+                    <!-- <table class="table table-bordered">
                     <thead>
                     <tr class = "red-bg">
                         
@@ -111,33 +111,34 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                         <td class = "white-font">Expiry Date</td>
                         <td class = "white-font">Account Balance (INR)</td>
                     </tr>
-                    </thead>
-                    <?php
-                    $con = mysqli_connect('localhost', 'root', '', 'credit_card');
-                    $sql = "SELECT * FROM cards  WHERE username = '$usr' ";
-                    $run_sql = mysqli_query($con, $sql);
+                    </thead>-->
+                    <?php 
+            //         $con = mysqli_connect('localhost', 'root', '', 'credit_card');
+            //         $sql = "SELECT * FROM cards  WHERE username = '$usr' ";
+            //         $run_sql = mysqli_query($con, $sql);
 
-				while($rows = mysqli_fetch_array($run_sql)){
-                echo '
+			// 	while($rows = mysqli_fetch_array($run_sql)){
+            //     echo '
 
-                    <tbody>
-                    <tr>
-                        <form action = "" method = "post" role = "form">
+            //         <tbody>
+            //         <tr>
+            //             <form action = "" method = "post" role = "form">
                             
-                            <td class = "white-font">'.$rows['name'].'</td>
-                            <td class = "white-font">'.$rows['bank'].'</td>
-                            <td class = "white-font">'.$rows['card_no'].'</td>
-                            <td class = "white-font">'.$rows['card_type'].'</td>
-                            <td class = "white-font">'.$rows['expiry_date'].'</td>
-                            <td class = "white-font">'.$rows['acc_balance'].'</td>
-                        </form>
-                    </tr>
-                    </tbody>
-                            ';
-            }  
-			// sample check
+            //                 <td class = "white-font">'.$rows['name'].'</td>
+            //                 <td class = "white-font">'.$rows['bank'].'</td>
+            //                 <td class = "white-font">'.$rows['card_no'].'</td>
+            //                 <td class = "white-font">'.$rows['card_type'].'</td>
+            //                 <td class = "white-font">'.$rows['expiry_date'].'</td>
+            //                 <td class = "white-font">'.$rows['acc_balance'].'</td>
+            //             </form>
+            //         </tr>
+            //         </tbody>
+            //                 ';
+            // }  
+			// // sample check
                             
-            echo'</table>';
+            // echo'</table>';
+				$view->display_cards();
                 ?>
             </div>
             
