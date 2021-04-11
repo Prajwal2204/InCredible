@@ -1,7 +1,7 @@
 <?php
-session_start();
-include_once 'config.php';
-$usr = $_SESSION["username"];
+// session_start();
+// include_once 'config.php';
+// $usr = $_SESSION["username"];
 // // $holder_name = $_POST['accname'];
 // if(!isset($_SESSION["loggedin"])){
 //     header("location: login.php");
@@ -10,7 +10,7 @@ $usr = $_SESSION["username"];
 
 include_once "class.transactions.php";
 
-	
+$get_card ;
 $dis = new transactions;
 ?>
 <!DOCTYPE html>
@@ -63,38 +63,34 @@ $dis = new transactions;
 					</div>
 					
 					<form class="form-horizontal d-flex" action="transactions.php" method="post" role="form">
+					<select class = "col-3 custom-select" style = "margin:10px; margin-bottom:25px" value="<?php echo htmlentities($get_card); ?>"
+							name="selectcard" id="selectcard">
 					<?php
 						echo '
-							<select class = "col-3 custom-select" style = "margin-right:10px;" name="selectcard" id="selectcard">
+							
 							<option value="none" selected disabled hidden>
 								Select a Card
 							</option>
 						';
-						$con = mysqli_connect('localhost', 'root', '', 'credit_card');
-						$in1_sql = "SELECT * FROM cards WHERE username = '$usr' ";
-						$sql_query = mysqli_query($con, $in1_sql);
-						while($rows = mysqli_fetch_array($sql_query)){
-							echo '
-									<option>'.$rows['card_no'].'</option>
-							';
-							
-						}
+
+						$dis->get_card();
+
 						echo '</select>';
 					?>
-						<select class = "col-3 custom-select" style = "margin-right:10px;" name="selectduration" id="selectduration">
-							<option value="none" selected disabled hidden>
+						<select class = "col-3 custom-select" style = "margin:10px;" name="selectduration" id="selectduration">
+							<option value="0" selected disabled hidden>
 								Select Duration
 							</option>
 							<option value="1">past 1 day</option>
 							<option value="2">past 2 days </option>
 							<option value="10">past 10 days</option>
 						</select>
-						<div style="width: 10px; height: 10px;"></div>
+						<div style="width: 10px; margin:10px; height: 10px;"></div>
 							<input type="submit" id="submit" name="submit" value = "Apply Filters" class="col-3 btn btn-block btn-danger">
 					</form>
-						<div style="width: 10px; height: 10px;"></div>
+						<div style="width: 20px; height: 30px;"></div>
 						<table class="table table-bordered">
-								<thead>
+								<!-- <thead>
 									<tr class = "red-bg">
 										<th class="white-font">Card 1</th>
 										<th class="white-font">Transaction Type</th>
@@ -104,15 +100,10 @@ $dis = new transactions;
 										<th class="white-font">Amount</th>
 										<th class="white-font">Transaction Timestamp</th>
 									</tr>
-								</thead>
+								</thead> -->
 			<?php
 			$dis->display();
-				// $con = mysqli_connect('localhost', 'root', '', 'credit_card');
-				// $in_sql = "SELECT * FROM cards WHERE username = '$usr' ";
-				// $ru_sql = mysqli_query($con, $in_sql);
-
-				// $rows = mysqli_fetch_array($ru_sql);
-				// $card = $rows['card_no'];
+				
 
 				
 			?>

@@ -83,7 +83,7 @@ class transfer_money extends DBC{
             $beneficiaryname_err = "Please enter a fullname";  
         }
         elseif(!preg_match("/^([a-zA-Z' ]+)$/",$beneficiaryname)){
-            $name_err = "It should contain alphabets";
+            $beneficiaryname_err = "It should contain alphabets";
         }else{
                 $beneficiaryname_err = "";
         }
