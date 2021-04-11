@@ -11,9 +11,10 @@ if(!isset($_SESSION["loggedin"])){
 <head>
 	<title>InCredible</title>
 	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "css/styles-admin-actual.css">
+    <link rel = "stylesheet" href = "css/styles-admin.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 
 
 <body class = "signin-body">
@@ -22,7 +23,7 @@ if(!isset($_SESSION["loggedin"])){
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
 			<li><a href="admin.php">Home</a></li>
 			<?php if (isset($_SESSION["username"])) { ?>
-			<li class = "topnav-right"><h3>Welcome, <?php echo $_SESSION["username"]; ?></h3></li>
+			<li class = "topnav-right"><a href="profile.php"><h3>Welcome, <?php echo $_SESSION["username"]; ?></h3></a></li>
 			<?php } else { ?>
 				<li class = "topnav-right"><h3>Welcome</h3></li>
 				<?php } ?>
@@ -57,6 +58,5 @@ if(!isset($_SESSION["loggedin"])){
 				</div>
 		</div>
 	</div>
-
 </body>
 </html>

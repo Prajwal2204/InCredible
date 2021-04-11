@@ -251,3 +251,7 @@ nav{
   .btn-custom{
       background-color: #dc3545;
   }
+
+  .custom-select{
+    border-radius: 17px;
+  }

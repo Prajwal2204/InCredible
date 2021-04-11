@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <head>
 	<title>InCredible</title>
 	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel = "stylesheet" href = "css/styles-admin-actual.css">
+    <link rel = "stylesheet" href = "css/styles-admin.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
 			<li><a href="admin.php">Home</a></li>
 			<?php if (isset($_SESSION["username"])) { ?>
-			<li class = "topnav-right"><h3><?php echo $_SESSION["username"]; ?></h3></li>
+			<li class = "topnav-right"><a href="profile.php"><h3><?php echo $_SESSION["username"]; ?></h3></a></li>
 			<?php } else { ?>
 				<li class = "topnav-right"><h3>Welcome</h3></li>
 				<?php } ?>
@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 						</div>
 					<form class="form-horizontal" action="profile.php" method="post" role="form">
                     <div class="form-group">
-						<label for="number" class="col-sm-3 control-label">FULL NAME</label>
+						<label for="number" class="col-sm-3 control-label">Full Name</label>
 							<div class="col-sm" class="form-control">
 								<input type="text" name="name" class="form-control <?php echo (!empty($fullname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlentities($full_name); ?>"
 								id="fullname">
