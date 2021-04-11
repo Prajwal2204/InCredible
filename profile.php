@@ -1,11 +1,19 @@
 <?php
-session_start();
-include_once 'config.php';
+// session_start();
+// include_once 'config.php';
+// $usr = $_SESSION['username'];
+// if(!isset($_SESSION["loggedin"])){
+//     header("location: login.php");
+//     exit;
+// }
+include_once "class.profile.php";
+
+$view = new profile;
 $usr = $_SESSION['username'];
-if(!isset($_SESSION["loggedin"])){
-    header("location: login.php");
-    exit;
-}
+$user_name = $email_id = $phone_no = "";
+
+$view->view_profile();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,22 +53,23 @@ if(!isset($_SESSION["loggedin"])){
 					<form class="form-horizontal" action="profile.php" method="post" role="form">
                     <div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Username</label>
-							<div class="col-sm">
-								<input type="text" name="usrname" class="form-control" value="#Enter username from db, no need to change"
-								id="usrname">
+							<div class="col-sm" class="form-control">
+								<!-- <input type="text" name="username" class="form-control" value="#Enter username from db, no need to change"
+								id="usrname"> -->
+								<?php echo $_SESSION["username"]; ?>
 							</div>
 					</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Email ID*</label>
 							<div class="col-sm">
-								<input type="text" name="beneficiarycard" class="form-control" value="#Enter email id from db"
+								<input type="email" name="emailid" class="form-control" value="<?php echo htmlentities($email_id);?>"
 								id="email">
 							</div>
 					</div>
 					<div class="form-group">
 						<label for="number" class="col-sm-3 control-label">Phone Number*</label>
 							<div class="col-sm">
-								<input type="text" name="number" class="form-control" value="#Add this number to db"
+								<input type="text" name="number" class="form-control" value="<?php echo htmlentities($phone_no);?>"
 								id="number">
 							</div>
 					</div>
