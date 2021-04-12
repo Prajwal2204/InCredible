@@ -55,7 +55,7 @@ $dis = new transactions;
 		</div>
 
 		<div class="col-8 container">
-		<div style="width: 150px; height: 150px;"></div>	
+		<div style="width: 50px; height: 50px;"></div>	
 			<article class="row custom-left-pad">
 				<section class="col-lg-8 white-font">
 					<div class="page-header">
@@ -84,6 +84,13 @@ $dis = new transactions;
 							<option value="1">past 1 day</option>
 							<option value="2">past 2 days </option>
 							<option value="10">past 10 days</option>
+						</select>
+						<select class = "col-3 custom-select" style = "margin:10px;" name="selecttransaction" id="selecttransaction">
+							<option value="0" selected disabled hidden>
+								Select Transaction Type
+							</option>
+							<option value="credit">Credit</option>
+							<option value="debit">Debit</option>
 						</select>
 						<div style="width: 10px; margin:10px; height: 10px;"></div>
 							<input type="submit" id="submit" name="submit" value = "Apply Filters" class="col-3 btn btn-block btn-danger">
