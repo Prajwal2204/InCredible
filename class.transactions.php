@@ -51,8 +51,8 @@ class transactions extends DBC{
 			$card1 = $_POST["selectcard"];
 			$trans = $_POST["selecttransaction"];
 			// $sql1 = "SELECT * FROM transfer WHERE username = ? and sender_card = ?";
-			$sql1 = "SELECT * FROM transfer WHERE username = ? AND transaction_type=? AND sender_card = ? AND time_of_transaction BETWEEN 
-			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) AND CURDATE()";
+			$sql1 = "SELECT * FROM transfer WHERE username = ? AND transaction_type=? AND sender_card = ? AND time_of_transaction >= 
+			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) ";
 			if($stmt = $mysqli->prepare($sql1)){
 				$stmt->bind_param("sss",$_SESSION['username'],$trans,$card1);
 				$stmt->execute();
@@ -134,8 +134,8 @@ class transactions extends DBC{
 			';
 			$card1 = $_POST["selectcard"];
 			// $sql1 = "SELECT * FROM transfer WHERE username = ? and sender_card = ?";
-			$sql1 = "SELECT * FROM transfer WHERE username = ? AND sender_card = ? AND time_of_transaction BETWEEN 
-			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) AND CURDATE()";
+			$sql1 = "SELECT * FROM transfer WHERE username = ? AND sender_card = ? AND time_of_transaction >= 
+			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) ";
 			if($stmt = $mysqli->prepare($sql1)){
 				$stmt->bind_param("ss",$_SESSION['username'],$card1);
 				$stmt->execute();
@@ -342,8 +342,8 @@ class transactions extends DBC{
 			</thead>
 			';
 			$card1 = $_POST["selectduration"];
-			$sql1 = "SELECT * FROM transfer WHERE username = ? AND time_of_transaction BETWEEN 
-			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) AND CURDATE()";
+			$sql1 = "SELECT * FROM transfer WHERE username = ? AND time_of_transaction >= 
+			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY)";
 			if($stmt = $mysqli->prepare($sql1)){
 				$stmt->bind_param("s",$_SESSION['username']);
 				$stmt->execute();
