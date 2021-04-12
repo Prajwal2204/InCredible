@@ -211,6 +211,8 @@ class add_cards extends DBC{
                 }
                 else{
                     $expirydate = trim($expiry_date);
+                }
+                    
             }
 
 
@@ -251,7 +253,7 @@ class add_cards extends DBC{
         
         // Close connection
             $mysqli->close();
-        }
-}
+        
+    }
 }
 ?>

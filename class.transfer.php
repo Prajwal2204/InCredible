@@ -59,9 +59,10 @@ class transfer_money extends DBC{
         elseif(!((strlen(trim($beneficiarycard))==15)|| (strlen(trim($beneficiarycard))==16)|| (strlen(trim($beneficiarycard))==13))){
             $beneficiarycard_err = "card number must have either 13 or 15 or 16 characters.";
         }
-        elseif(!(strcmp($beneficiarycard, $_POST['sendercard'])))
-        {
-            $beneficiarycard_err = "NOT possible to transfer amount from sender to sender it would be redundant!";
+        elseif(!empty($_POST['sendercard'])){
+        // {   empty($_POST['sendercard'])
+            if(!(strcmp($beneficiarycard, $_POST['sendercard']))){
+            $beneficiarycard_err = "NOT possible to transfer amount from sender to sender it would be redundant!";}
         }
         elseif(!($this->validatecard(trim($beneficiarycard)))){
             $beneficiarycard_err = "Not A Valid CARD no.";				
@@ -116,12 +117,7 @@ class transfer_money extends DBC{
         $beneficiaryname = $_POST['beneficiaryname'];
         $amount = $_POST['amount'];
         $cvv_code = $_POST["cvv"];
-        if(empty($this->error_checking($beneficiarycard))){
-            $beneficiary_card = trim($beneficiarycard);
-        }
-        if(empty($this->error_checking_name($beneficiaryname))){
-            $beneficiary_name = trim($beneficiaryname);
-        }
+        
         if(empty($_POST['sendercard'])){
             $sendercard_err = "Please choose one of the card";
         }
@@ -129,6 +125,26 @@ class transfer_money extends DBC{
             
             $sendercard = $_POST['sendercard'];
             $sender_card = trim($sendercard);
+
+            $sql12 = "SELECT expiry_date FROM cards WHERE card_no = ?";
+            $stmt10 = $mysqli->prepare($sql12);
+            $stmt10->bind_param("s",$_POST['sendercard']);
+            if( $stmt10->execute()){
+            // $stmt10->execute();
+            $result3 = $stmt10->get_result();
+    
+            $row1 = $result3->fetch_assoc();
+            $current_date = $row1['expiry_date'];
+            $date = new DateTime($current_date);
+            $now = new DateTime();
+                if($date < $now) {
+                    $sendercard_err = 'CARD expired pls change the card';
+                    return;
+                }
+            }
+            $stmt10->free_result();
+            $stmt10->close();
+
             if(empty(trim($cvv_code))){
                 $cvv_err = "Please enter a cvv code.";  
             }
@@ -156,6 +172,14 @@ class transfer_money extends DBC{
             }
         }
 
+        if(empty($this->error_checking($beneficiarycard))){
+            $beneficiary_card = trim($beneficiarycard);
+        }
+        if(empty($this->error_checking_name($beneficiaryname))){
+            $beneficiary_name = trim($beneficiaryname);
+        }
+
+
         if(empty(trim($amount))){
             $amount_err = "Please enter amount";  
         }
@@ -171,8 +195,6 @@ class transfer_money extends DBC{
             }
         }
 
-
-
         if(empty($beneficiarycard_err)&&empty($beneficiaryname_err)&&empty($sendercard_err)&&empty($cvv_err)&&empty($amount_err)){
             
         
@@ -186,6 +208,9 @@ class transfer_money extends DBC{
         $current_bal = $row1['acc_balance'];
         $stmt2->free_result();
         $stmt2->close();
+        
+        
+        
 
         if($amount_value>0){
 
@@ -236,10 +261,6 @@ class transfer_money extends DBC{
 
                 $stmt2->free_result();
                 $stmt2->close();
-
-
-
-                    
 
                 $success = "Transferred succesfully!";
             }
