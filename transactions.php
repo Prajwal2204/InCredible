@@ -89,8 +89,8 @@ $dis = new transactions;
 							<option value="0" selected disabled hidden>
 								Select Transaction Type
 							</option>
-							<option value="credit">Credit</option>
-							<option value="debit">Debit</option>
+							<option value="CREDITED">Credit</option>
+							<option value="DEBITED">Debit</option>
 						</select>
 						<div style="width: 10px; margin:10px; height: 10px;"></div>
 							<input type="submit" id="submit" name="submit" value = "Apply Filters" class="col-3 btn btn-block btn-danger">
