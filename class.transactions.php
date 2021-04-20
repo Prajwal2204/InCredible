@@ -103,7 +103,7 @@ class transactions extends DBC{
 		}
 		else{
 
-		if($_POST["selectcard"] && $_POST["selectduration"]){
+		if($_POST["selectcard"] && $_POST["selectduration"] && !($_POST['selecttransaction'])){
 			//$view->view_profile();
 
 			if($_POST["selectduration"]==1){
@@ -138,6 +138,160 @@ class transactions extends DBC{
 			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) ";
 			if($stmt = $mysqli->prepare($sql1)){
 				$stmt->bind_param("ss",$_SESSION['username'],$card1);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				if($result->num_rows > 0){
+					while($rows = $result->fetch_assoc()){
+						if($rows['transaction_type']=='DEBITED'){
+							echo '
+								
+	
+								<tbody>
+										<tr>
+											<td class="white-font">'.$rows['sender_card'].'</td>
+											<td class="white-font red-arrow fas fa-arrow-alt-circle-up d-flex justify-content-center" style="font-size:30px;color:#dc3545;border:none;"></td>
+											<td class="white-font">'.$rows['beneficiary_card'].'</td>
+											<td class="white-font">'.$rows['beneficiary_name'].'</td>
+											<td class="white-font"><b>ME</b></td>
+											<td class="white-font">'.$rows['transfer_amt'].'</td>
+											<td class="white-font">'.$rows['time_of_transaction'].'</td>
+										</tr>
+								</tbody>
+								
+							';
+						}
+						elseif($rows['transaction_type']=='CREDITED'){
+							echo '
+	
+							<tbody>
+									<tr>
+										<td class="white-font">'.$rows['sender_card'].'</td>
+										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
+										<td class="white-font">'.$rows['beneficiary_card'].'</td>
+										<td class="white-font"><b>SELF</b></td>
+										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$rows['transfer_amt'].'</td>
+										<td class="white-font">'.$rows['time_of_transaction'].'</td>
+									</tr>
+							</tbody>
+							
+							';
+						}
+					}
+				}
+				$stmt->free_result();
+            $stmt->close();
+			}
+			// $mysqli->close();
+		}
+
+		elseif($_POST["selectcard"] && !($_POST["selectduration"]) && ($_POST['selecttransaction'])){
+			//$view->view_profile();
+
+			
+			echo '
+			<thead>
+			<tr class = "red-bg">
+				<th class="white-font">Card 1</th>
+				<th class="white-font">Transaction Type</th>
+				<th class="white-font">Card 2</th>
+				<th class="white-font">Beneficiary</th>
+				<th class="white-font">Sender</th>
+				<th class="white-font">Amount</th>
+				<th class="white-font">Transaction Timestamp</th>
+			</tr>
+			</thead>
+			';
+			$card1 = $_POST["selectcard"];
+			$trans = $_POST["selecttransaction"];
+			// $sql1 = "SELECT * FROM transfer WHERE username = ? and sender_card = ?";
+			$sql1 = "SELECT * FROM transfer WHERE username = ? AND transaction_type=? AND sender_card = ? ";
+			if($stmt = $mysqli->prepare($sql1)){
+				$stmt->bind_param("sss",$_SESSION['username'],$trans,$card1);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				if($result->num_rows > 0){
+					while($rows = $result->fetch_assoc()){
+						if($rows['transaction_type']=='DEBITED'){
+							echo '
+								
+	
+								<tbody>
+										<tr>
+											<td class="white-font">'.$rows['sender_card'].'</td>
+											<td class="white-font red-arrow fas fa-arrow-alt-circle-up d-flex justify-content-center" style="font-size:30px;color:#dc3545;border:none;"></td>
+											<td class="white-font">'.$rows['beneficiary_card'].'</td>
+											<td class="white-font">'.$rows['beneficiary_name'].'</td>
+											<td class="white-font"><b>ME</b></td>
+											<td class="white-font">'.$rows['transfer_amt'].'</td>
+											<td class="white-font">'.$rows['time_of_transaction'].'</td>
+										</tr>
+								</tbody>
+								
+							';
+						}
+						elseif($rows['transaction_type']=='CREDITED'){
+							echo '
+	
+							<tbody>
+									<tr>
+										<td class="white-font">'.$rows['sender_card'].'</td>
+										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
+										<td class="white-font">'.$rows['beneficiary_card'].'</td>
+										<td class="white-font"><b>SELF</b></td>
+										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$rows['transfer_amt'].'</td>
+										<td class="white-font">'.$rows['time_of_transaction'].'</td>
+									</tr>
+							</tbody>
+							
+							';
+						}
+					}
+				}
+				$stmt->free_result();
+            $stmt->close();
+			}
+			// $mysqli->close();
+		}
+
+		elseif(!($_POST["selectcard"]) && $_POST["selectduration"] && ($_POST['selecttransaction'])){
+			//$view->view_profile();
+
+			if($_POST["selectduration"]==1){
+				$put = 1;
+			}
+			elseif($_POST["selectduration"]==2){
+				$put = 2;
+			}
+			elseif($_POST["selectduration"]==10){
+				$put = 10;
+			}
+			else{
+				
+			}
+
+			echo '
+			<thead>
+			<tr class = "red-bg">
+				<th class="white-font">Card 1</th>
+				<th class="white-font">Transaction Type</th>
+				<th class="white-font">Card 2</th>
+				<th class="white-font">Beneficiary</th>
+				<th class="white-font">Sender</th>
+				<th class="white-font">Amount</th>
+				<th class="white-font">Transaction Timestamp</th>
+			</tr>
+			</thead>
+			';
+			// $card1 = $_POST["selectcard"];
+			
+			$trans = $_POST["selecttransaction"];
+			// $sql1 = "SELECT * FROM transfer WHERE username = ? and sender_card = ?";
+			$sql1 = "SELECT * FROM transfer WHERE username = ? AND transaction_type=? AND time_of_transaction >= 
+			DATE_SUB(CURDATE(), INTERVAL ".$put." DAY) ";
+			if($stmt = $mysqli->prepare($sql1)){
+				$stmt->bind_param("ss",$_SESSION['username'],$trans);
 				$stmt->execute();
 				$result = $stmt->get_result();
 				if($result->num_rows > 0){
