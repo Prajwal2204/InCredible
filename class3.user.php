@@ -9,7 +9,7 @@ class login_in extends DBC{
 
     public function signin(){
         if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-            header("location: admin.php");
+            header("location: index.php");
             echo $_SESSION["loggedin"] ;
             exit;
         }
@@ -69,7 +69,7 @@ class login_in extends DBC{
                                     $_SESSION["username"] = $username;                            
                                     
                                     // Redirect user to welcome page
-                                    header("location: admin.php");
+                                    header("location: index.php");
                                 } else{
                                     // Password is not valid, display a generic error message
                                     $login_err = "Invalid username or password.";

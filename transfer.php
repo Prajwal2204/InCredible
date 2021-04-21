@@ -31,7 +31,7 @@ $sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $bene
 	<nav>
 		<ul class="topnav">
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
-			<li><a href="admin.php">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<?php if (isset($_SESSION["username"])) { ?>
 			<li class = "topnav-right"><a href="profile.php"><h3><?php echo $_SESSION["username"]; ?></h3></a></li>
 			<?php } else { ?>
@@ -51,9 +51,7 @@ $sendercard = $sendercard_err = $beneficiarycard_err = $beneficiary_card = $bene
 				<ul class="list-unstyled">
 					<li><a class="btn btn-outline-danger" href="viewcards.php"><b>View Cards</b></a></li>			
 					<li><a class="btn btn-outline-danger" href="addcard.php"><b>Add Card</b></a></li>
-					<!-- <li><a class="btn btn-outline-danger" href="removecard.php"><b>Remove Card</b></a></li> -->
 					<li><a class="btn btn-outline-danger" href="transactions.php"><b>My Transactions</b></a></li>
-					<!-- <li><a class="btn btn-outline-danger" href="viewaccounts.php"><b>View accounts</b></a></li> -->
 					<li><a class="btn btn-outline-danger active" href="transfer.php"><b>Transfer Amount</b></a></li>
 				</ul>
 		</div>

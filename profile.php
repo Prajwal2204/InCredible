@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	<nav>
 		<ul class="topnav">
 			<li class = "logo"><img class = "logo-mod" src="img/logo.PNG"></li>
-			<li><a href="admin.php">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<?php if (isset($_SESSION["username"])) { ?>
 			<li class = "topnav-right"><a href="profile.php"><h3><?php echo $_SESSION["username"]; ?></h3></a></li>
 			<?php } else { ?>
