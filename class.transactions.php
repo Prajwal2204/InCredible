@@ -78,6 +78,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
+
 							echo '
 	
 							<tbody>
@@ -86,7 +103,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -161,6 +178,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+							// $sendername = "";
+							$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+							if($stmt22 = $mysqli->prepare($sql22)){
+								$stmt22->bind_param("s",$c2);
+								$stmt22->execute();
+								$result9 = $stmt22->get_result();
+								if($result9->num_rows > 0){
+									$row1 = $result9->fetch_assoc();
+									// $sendername2 = $row1['username'];
+								}
+							$stmt22->free_result();
+							$stmt22->close();
+						}
+	
+
 							echo '
 	
 							<tbody>
@@ -169,7 +203,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -231,6 +265,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
+							
 							echo '
 	
 							<tbody>
@@ -239,7 +290,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -315,6 +366,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
+
 							echo '
 	
 							<tbody>
@@ -323,7 +391,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -381,6 +449,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
+
 							echo '
 	
 							<tbody>
@@ -389,7 +474,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -446,6 +531,23 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
+
 							echo '
 	
 							<tbody>
@@ -454,7 +556,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -522,7 +624,24 @@ class transactions extends DBC{
 							';
 						}
 						elseif($rows['transaction_type']=='CREDITED'){
+
+							$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
 							echo '
+
 	
 							<tbody>
 									<tr>
@@ -530,7 +649,7 @@ class transactions extends DBC{
 										<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 										<td class="white-font">'.$rows['beneficiary_card'].'</td>
 										<td class="white-font"><b>SELF</b></td>
-										<td class="white-font">'.$_SESSION["username"].'</td>
+										<td class="white-font">'.$row1["username"].'</td>
 										<td class="white-font">'.$rows['transfer_amt'].'</td>
 										<td class="white-font">'.$rows['time_of_transaction'].'</td>
 									</tr>
@@ -574,6 +693,7 @@ class transactions extends DBC{
 			';
                 while($rows = $result->fetch_assoc()){
                     if($rows['transaction_type']=='DEBITED'){
+						
 						echo '
 
 							<tbody>
@@ -591,6 +711,21 @@ class transactions extends DBC{
 						';
 					}
 					elseif($rows['transaction_type']=='CREDITED'){
+						$c2 = $rows['beneficiary_card'];
+						// $sendername = "";
+						$sql22 = "SELECT username FROM cards WHERE card_no = ?";
+						if($stmt22 = $mysqli->prepare($sql22)){
+							$stmt22->bind_param("s",$c2);
+							$stmt22->execute();
+							$result9 = $stmt22->get_result();
+							if($result9->num_rows > 0){
+								$row1 = $result9->fetch_assoc();
+								// $sendername2 = $row1['username'];
+							}
+						$stmt22->free_result();
+						$stmt22->close();
+					}
+
 						echo '
 
 						<tbody>
@@ -599,7 +734,7 @@ class transactions extends DBC{
 									<td class="white-font green-arrow fas fa-arrow-alt-circle-down d-flex justify-content-center" style="font-size:30px;color:#0FFF50;border:none;"></td>
 									<td class="white-font">'.$rows['beneficiary_card'].'</td>
 									<td class="white-font"><b>SELF</b></td>
-									<td class="white-font">'.$_SESSION["username"].'</td>
+									<td class="white-font">'.$row1['username'].'</b></td>
 									<td class="white-font">'.$rows['transfer_amt'].'</td>
 									<td class="white-font">'.$rows['time_of_transaction'].'</td>
 								</tr>
